@@ -16,9 +16,7 @@
   width: 282px;
   height: 361px;
   background-color: #fff;
-  display: grid;
   border-radius: 10px;
-  text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
 }
@@ -29,8 +27,8 @@
 
 .card__title-bar {
   width: 282px;
-  display: flex;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 75% 25%;
 }
 
 .card__title {
@@ -41,10 +39,21 @@
   font-weight: 900;
   font-size: 24px;
   line-height: 29px;
+  display: grid;
+  align-self: center;
+  padding-left: 10%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .card__title-button {
   height: 18px;
+  display: grid;
+  justify-content: center;
+  align-self: center;
+  border: none;
+  background: white;
 }
 
 .card__title-button:hover {
