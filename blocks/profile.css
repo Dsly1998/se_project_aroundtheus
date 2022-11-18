@@ -72,7 +72,7 @@
 }
 
 @media screen and (min-width: 320px) and (max-width: 768px) {
-  .profile__bar {
+  .profile {
     width: 282px;
     height: 286px;
     display: flex;
@@ -133,7 +133,7 @@
 }
 
 @media screen and (min-width: 768px) and (max-width: 1280px) {
-  .profile__bar {
+  .profile {
     width: 700px;
     margin: auto;
     display: grid;
