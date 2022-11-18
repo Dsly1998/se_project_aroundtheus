@@ -1,4 +1,4 @@
-.profile__bar {
+.profile {
   display: grid;
   grid-template-columns: 25% 58% 17%;
   width: 880px;
