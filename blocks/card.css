@@ -27,11 +27,11 @@
 .card__title-bar {
   width: 282px;
   display: grid;
-  grid-template-columns: 75% 25%;
+  grid-template-columns: 80% 20%;
 }
 
 .card__title {
-  font-family: "Inter" Arial, sans-serif;
+  font-family: "Inter", Arial, sans-serif;
   height: 29px;
   font-style: normal;
   font-weight: 900;
