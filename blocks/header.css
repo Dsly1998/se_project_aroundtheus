@@ -23,7 +23,7 @@
   .header {
     padding-top: 28px;
     padding-left: 27px;
-    width: 320px;
+    width: 282px;
   }
 
   .header__logo {
@@ -32,8 +32,8 @@
   }
 }
 
-@media screen and (min-width: 768px) and (max-width: 1280px) {
+@media screen and (min-width: 768px) and (max-width: 1279px) {
   .header {
-    width: 880px;
+    width: 768px;
   }
 }
