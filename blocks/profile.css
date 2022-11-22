@@ -104,15 +104,19 @@
     line-height: 27px;
     margin: 0 auto 0;
     padding-top: 26px;
-    padding-bottom: 16px;
+    padding-bottom: 0;
+  }
+
+  .profile__title-bar {
+    grid-template-columns: 95% 5%;
   }
 
   .profile__title-discription {
     width: 196px;
     font-size: 14px;
     line-height: 17px;
-    margin: auto;
-    justify-content: center;
+    text-align: center;
+    margin-top: 14px;
   }
   .profile__button {
     width: 100%;
@@ -121,7 +125,7 @@
     width: 18px;
     height: 18px;
     justify-content: center;
-    margin-top: 6px;
+    margin-top: 30px;
   }
 
   .profile__button-image {
