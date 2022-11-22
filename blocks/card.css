@@ -1,6 +1,5 @@
 .card {
   max-width: 880px;
-  max-height: 742px;
   margin: auto;
   padding-top: 47px;
   display: grid;
@@ -13,7 +12,6 @@
 
 .card__content {
   width: 282px;
-  height: 361px;
   background-color: #fff;
   border-radius: 10px;
   white-space: nowrap;
@@ -32,7 +30,6 @@
 
 .card__title {
   font-family: "Inter", Arial, sans-serif;
-  height: 29px;
   font-style: normal;
   font-weight: 900;
   font-size: 24px;
@@ -42,6 +39,8 @@
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
+  margin-top: 25px;
+  margin-bottom: 25px;
 }
 
 .card__title-button {
@@ -50,7 +49,7 @@
   justify-content: center;
   align-self: center;
   border: none;
-  background: white;
+  background: transparent;
 }
 
 .card__title-button:hover {
@@ -59,41 +58,18 @@
 
 @media screen and (min-width: 320px) and (max-width: 768px) {
   .card {
-    width: 282px;
-    height: 361px;
-    background: #ffffff;
-    border-radius: 10px;
-    display: grid;
     grid-template-columns: auto;
     padding-top: 0;
     margin-top: 36px;
   }
-  .card__content {
-    width: 282px;
-    height: 361px;
-    border-radius: 10px;
-    white-space: nowrap;
-    overflow: hidden;
-  }
-  .card__image {
-    width: 282px;
-    height: 282px;
-  }
-  .card__title-bar {
-    width: 282px;
-    display: grid;
-    grid-template-columns: 75% 25%;
-  }
+}
+.card__title-bar {
+  grid-template-columns: 80% 20%;
 }
 
 @media screen and (min-width: 768px) and (max-width: 1280px) {
   .card {
     max-width: 582px;
-    margin: auto;
-    display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto;
-    row-gap: 17px;
-    justify-content: center;
   }
 }
