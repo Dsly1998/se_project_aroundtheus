@@ -163,5 +163,6 @@
 
   .profile__title-discription {
     margin-left: 0;
+    max-width: 100%;
   }
 }
