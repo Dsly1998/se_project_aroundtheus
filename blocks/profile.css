@@ -111,7 +111,7 @@
   }
 
   .profile__title {
-    width: auto;
+    max-width: 100%;
     font-size: 22px;
     line-height: 27px;
     margin: 0 auto 0;
