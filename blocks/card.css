@@ -3,10 +3,10 @@
   margin: auto;
   padding-top: 47px;
   display: grid;
-  grid-template-columns: 33% 33% 33%;
+  grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: auto;
-  row-gap: 17px;
-  column-gap: 20px;
+  row-gap: 20px;
+  column-gap: 17px;
   justify-content: center;
 }
 
@@ -58,7 +58,12 @@
   transition: 0.5s;
 }
 
-@media screen and (min-width: 320px) and (max-width: 768px) {
+.card__button-image {
+  width: 21px;
+  height: 18px;
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
   .card {
     grid-template-columns: auto;
     padding-top: 0;
