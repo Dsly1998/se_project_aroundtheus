@@ -19,6 +19,40 @@
       />
     </header>
     <main class="page">
+      <section class="modal modal__open">
+        <div class="modal__container">
+          <button class="modal__button-exit" type="button">
+            <img
+              src="./images/Vector_plus.svg"
+              alt="plus"
+              class="modal__button-symbol"
+            />
+          </button>
+          <h1 class="modal__title">Edit profile</h1>
+          <form class="modal__form">
+            <fieldset class="modal__fieldset">
+              <label class="modal__label-name">Name</label>
+              <input
+                class="modal__input-name"
+                type="text"
+                id="name"
+                name="name"
+                placeholder=""
+                required
+              />
+              <label class="modal__label-description">About me</label>
+              <input
+                class="modal__input-description"
+                type="text"
+                id="description"
+                placeholder=""
+                required
+              />
+              <fieldset class="modal__fieldset">
+                <button class="modal__button">Save</button>
+              </fieldset>
+        </div>
+      </section>
       <section class="profile">
         <img
           src="./images/jacques-cousteau.png"
