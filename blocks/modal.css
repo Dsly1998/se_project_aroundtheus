@@ -134,7 +134,7 @@
   position: absolute;
   top: -35px;
   right: -35px;
-  isplay: none;
+  display: none;
 }
 
 .modal__button-exit:hover {

@@ -24,3 +24,12 @@ const initialCards = [
     link: "../images/lago-di-braies.png",
   },
 ];
+
+const profileEditOpen = document.querySelector(profile__button - edit);
+const profileModalOpen = document.querySelector(Modal__open);
+const profileModal = document.querySelector(modal);
+const modalCloseButton = document.querySelector(modal__button - exit);
+
+profileEditButton.addEventListener("click");
+
+modalCloseButton.addEventListner("click");
