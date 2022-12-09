@@ -9,7 +9,7 @@
 }
 
 .modal__container {
-  position: absolute;
+  position: fixed;
   width: 430px;
   height: 330px;
   margin-left: auto;
@@ -91,6 +91,7 @@
   border-right: none;
   align-self: center;
   border-color: rgba(0, 0, 0, 0.2);
+  padding-bottom: 13px;
 }
 
 .modal__input-description {
@@ -101,6 +102,7 @@
   border-right: none;
   align-self: center;
   border-color: rgba(0, 0, 0, 0.2);
+  padding-bottom: 13px;
 }
 
 .modal__label-name {
@@ -128,7 +130,7 @@
 .modal__button-exit {
   width: 40px;
   height: 40px;
-  background-color: #000000;
+  background-color: transparent;
   border: none;
   transform: rotate(-45deg);
   position: absolute;
@@ -145,6 +147,10 @@
 .modal__button-symbol {
   width: 40px;
   height: 40px;
+}
+
+::placeholder {
+  color: #000000;
 }
 
 @media screen and (min-width: 320px) and (max-width: 767px) {
