@@ -32,7 +32,7 @@
   white-space: nowrap;
 }
 
-.profile__title-discription {
+.profile__title-description {
   color: #fff;
   width: 440px;
   font-family: "Inter", Arial, sans-serif;
@@ -123,7 +123,7 @@
     grid-template-columns: 92% 8%;
   }
 
-  .profile__title-discription {
+  .profile__title-description {
     width: 196px;
     font-size: 14px;
     line-height: 17px;
