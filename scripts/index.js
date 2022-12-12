@@ -25,7 +25,22 @@ const initialCards = [
   },
 ];
 
-function getCardElement() {}
+initialCards.forEach((card) => {
+  const cardTemplate = document
+    .querySelector("#card-template")
+    .content.querySelector(".card__content");
+  const cardContent = document.querySelector(".card__content");
+  const cardElement = cardTemplate.cloneNode(true);
+
+  const cardImage = cardElement.querySelector(".card__image");
+  const cardTitle = cardElement.querySelector(".card__title");
+
+  cardImage.src = `url(${card.link})`;
+  cardTitle.textContent = card.name;
+  placesList.append(cardElement);
+});
+
+const placesList = document.querySelector(".card");
 
 const profileEditOpen = document.querySelector(".profile__button-edit");
 const modalElement = document.querySelector(".modal");
