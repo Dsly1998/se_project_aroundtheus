@@ -24,6 +24,7 @@ const initialCards = [
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
   },
 ];
+
 const placesList = document.querySelector(".card");
 initialCards.forEach((card) => {
   const cardTemplate = document
@@ -35,7 +36,7 @@ initialCards.forEach((card) => {
   const cardImage = cardElement.querySelector(".card__image");
   console.log(cardImage);
   const cardTitle = cardElement.querySelector(".card__title");
-
+  cardImage.src = card.link;
   cardImage.style.backgroundImage = `url(${card.link})`;
   cardTitle.textContent = card.name;
   placesList.append(cardElement);
