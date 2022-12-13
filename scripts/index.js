@@ -1,30 +1,30 @@
 const initialCards = [
   {
     name: "Yosemite Valley",
-    link: "../images/yosemite-valley.png",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
   },
   {
     name: "Lake Louise",
-    link: "../images/lake-louise.png",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lake-louise.jpg",
   },
   {
     name: "Bald Mountains",
-    link: "../images/bald-mountains.png",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/bald-mountains.jpg",
   },
   {
     name: "Latemar",
-    link: "../images/latemar.png",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/latemar.jpg",
   },
   {
     name: "Vanoise National Park",
-    link: "../images/vanoise-national-park.png",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/vanoise.jpg",
   },
   {
     name: "Lago di Braies",
-    link: "../images/lago-di-braies.png",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
   },
 ];
-
+const placesList = document.querySelector(".card");
 initialCards.forEach((card) => {
   const cardTemplate = document
     .querySelector("#card-template")
@@ -33,14 +33,13 @@ initialCards.forEach((card) => {
   const cardElement = cardTemplate.cloneNode(true);
 
   const cardImage = cardElement.querySelector(".card__image");
+  console.log(cardImage);
   const cardTitle = cardElement.querySelector(".card__title");
 
-  cardImage.src = `url(${card.link})`;
+  cardImage.style.backgroundImage = `url(${card.link})`;
   cardTitle.textContent = card.name;
   placesList.append(cardElement);
 });
-
-const placesList = document.querySelector(".card");
 
 const profileEditOpen = document.querySelector(".profile__button-edit");
 const modalElement = document.querySelector(".modal");
