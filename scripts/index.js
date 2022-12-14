@@ -2,31 +2,38 @@ const initialCards = [
   {
     name: "Yosemite Valley",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
+    alt: "Yosemite Valley",
   },
   {
     name: "Lake Louise",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lake-louise.jpg",
+    alt: "Lake Louise",
   },
   {
     name: "Bald Mountains",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/bald-mountains.jpg",
+    alt: "Bald Mountains",
   },
   {
     name: "Latemar",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/latemar.jpg",
+    alt: "Latemar",
   },
   {
     name: "Vanoise National Park",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/vanoise.jpg",
+    alt: "Vanoise National Park",
   },
   {
     name: "Lago di Braies",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
+    alt: "Lago di Braies",
   },
 ];
 
 const placesList = document.querySelector(".card");
-initialCards.forEach((card) => {
+
+function createCardElelement(card) {
   const cardTemplate = document
     .querySelector("#card-template")
     .content.querySelector(".card__content");
@@ -34,13 +41,19 @@ initialCards.forEach((card) => {
   const cardElement = cardTemplate.cloneNode(true);
 
   const cardImage = cardElement.querySelector(".card__image");
-  console.log(cardImage);
   const cardTitle = cardElement.querySelector(".card__title");
   cardImage.src = card.link;
-  cardImage.style.backgroundImage = `url(${card.link})`;
+  cardImage.alt = card.alt;
   cardTitle.textContent = card.name;
-  placesList.append(cardElement);
-});
+
+  return cardElement;
+}
+
+function renderCard(card, wrapper) {
+  wrapper.append(createCardElelement(card));
+}
+
+initialCards.forEach((card) => renderCard(card, placesList));
 
 const profileEditOpen = document.querySelector(".profile__button-edit");
 const modalElement = document.querySelector(".modal");
