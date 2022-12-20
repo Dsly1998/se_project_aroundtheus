@@ -57,28 +57,30 @@ initialCards.forEach((card) => renderCard(card, placesList));
 
 const profileEditOpen = document.querySelector(".profile__button-edit");
 const modalElement = document.querySelector(".modal");
-const profileModalClose = document.querySelector(".modal__button-exit");
+const profileModalClose = modalElement.querySelector(".modal__button-exit");
 const profileEditForm = document.querySelector("#edit-profile-form");
 const profileNameTitle = document.querySelector(".profile__title");
 const profileJobTitle = document.querySelector(".profile__title-description");
 const nameInput = document.querySelector(".modal__input-name");
 const jobInput = document.querySelector(".modal__input-description");
 
-function closeModal() {
-  modalElement.classList.add("modal");
+function closeModal(modal) {
+  modal.classList.add("modal");
 }
 
-function openModal() {
-  modalElement.classList.remove("modal");
+function openModal(modal) {
+  modal.classList.remove("modal");
 }
 
-profileEditOpen.addEventListener("click", function () {
+profileEditOpen.addEventListener("click", () => {
   nameInput.value = profileNameTitle.textContent;
   jobInput.value = profileJobTitle.textContent;
-  openModal();
+  openModal(modalElement);
 });
 
-profileModalClose.addEventListener("click", closeModal);
+profileModalClose.addEventListener("click", function () {
+  closeModal(modalElement);
+});
 
 profileEditForm.addEventListener("submit", function (event) {
   event.preventDefault();
@@ -86,5 +88,23 @@ profileEditForm.addEventListener("submit", function (event) {
   const descriptionValue = event.target.description.value;
   profileNameTitle.textContent = nameValue;
   profileJobTitle.textContent = descriptionValue;
-  closeModal();
+  closeModal(modalElement);
+});
+
+const cardAddButton = document.querySelector(".profile__button");
+const cardModalElement = document.querySelector("#modal-card-add");
+const cardAddClose = cardModalElement.querySelector(".modal__button-exit");
+const cardAddForm = cardModalElement.querySelector(".modal__form");
+
+cardAddButton.addEventListener("click", () => {
+  openModal(cardModalElement);
+});
+
+cardAddClose.addEventListener("click", function () {
+  closeModal(cardModalElement);
+});
+
+cardAddForm.addEventListener("submit", function (e) {
+  e.preventDefault();
+  console.log("hello");
 });
