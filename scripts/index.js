@@ -105,8 +105,11 @@ cardAddClose.addEventListener("click", function () {
 
 cardAddForm.addEventListener("submit", function (e) {
   e.preventDefault();
-  createCardElelement(cardAddForm);
   const title = e.target.title.value;
   const link = e.target.link.value;
-  closeModal(cardModalElement);
+  renderCard({
+    name: title,
+    link: link,
+  });
+  closeModal(cardAddForm);
 });
