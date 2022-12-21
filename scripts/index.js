@@ -105,6 +105,7 @@ cardAddClose.addEventListener("click", function () {
 
 cardAddForm.addEventListener("submit", function (e) {
   e.preventDefault();
+  createCardElelement(card);
   const title = e.target.title.value;
   const link = e.target.link.value;
   renderCard({
