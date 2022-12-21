@@ -66,7 +66,7 @@ const jobInput = document.querySelector(".modal__input-description");
 const cardAddButton = document.querySelector(".profile__button");
 const cardModalElement = document.querySelector("#modal-card-add");
 const cardAddClose = cardModalElement.querySelector(".modal__button-exit");
-const cardAddForm = document.querySelector(".modal__form");
+const cardAddForm = document.querySelector("#modal-card-form");
 
 function closeModal(modal) {
   modal.classList.add("modal");
