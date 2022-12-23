@@ -63,6 +63,17 @@
   height: 18px;
 }
 
+.card__button {
+  position: relative;
+  bottom: 17px;
+  width: 21px;
+  height: 17px;
+}
+
+.card__button-inactive {
+  display: none;
+}
+
 @media screen and (min-width: 320px) and (max-width: 767px) {
   .card {
     grid-template-columns: auto;

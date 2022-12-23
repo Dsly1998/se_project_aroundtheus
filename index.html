@@ -11,7 +11,7 @@
     <link rel="icon" href="favicon.ico" />
   </head>
   <body class="body">
-   <section class="modal modal__open">
+    <section class="modal modal__open">
       <div class="modal__container modal__container-open">
         <button class="modal__button-exit" type="button">
           <img
@@ -39,9 +39,11 @@
               name="description"
               placeholder="Description"
             />
-            <fieldset class="modal__fieldset">
-              <button class="modal__button" type="submit">Save</button>
-            </fieldset>
+          </fieldset>
+          <fieldset class="modal__fieldset">
+            <button class="modal__button" type="submit">Save</button>
+          </fieldset>
+        </form>
       </div>
     </section>
     <section class="modal modal__open" id="modal-card-add">
@@ -60,8 +62,7 @@
             <input
               class="modal__input-name"
               type="text"
-              id="Title"
-              name="Title"
+              name="name"
               placeholder="Title"
             />
             <label class="modal__label-description"></label>
@@ -72,9 +73,11 @@
               name="link"
               placeholder="Image link"
             />
-            <fieldset class="modal__fieldset">
-              <button class="modal__button" type="submit">Create</button>
-            </fieldset>
+          </fieldset>
+          <fieldset class="modal__fieldset">
+            <button class="modal__button" type="submit">Create</button>
+          </fieldset>
+        </form>
       </div>
     </section>
     <header class="header">
@@ -110,31 +113,32 @@
           />
         </button>
       </section>
-      <section class="card">
-      </section>
+      <section class="card"></section>
     </main>
     <footer class="footer">
       <p class="footer__copyright">&copy; 2022 Around The U.S.</p>
     </footer>
     <template id="card-template">
-    <div class="card__content">
-      <img
-        src=""
-        alt=""
-        class="card__image"
-      />
-      <div class="card__title-bar">
-        <h2 class="card__title"></h2>
-        <button class="card__title-button" type="button">
-          <img
-            src="./images/Vector_heart_2.svg"
-            alt="image of heart"
-            class="card__button-image"
-          />
-        </button>
+      <div class="card__content">
+        <img src="" alt="" class="card__image" />
+        <div class="card__title-bar">
+          <h2 class="card__title"></h2>
+          <button class="card__title-button" type="button">
+            <img
+              src="./images/Vector_heart_2.svg"
+              alt="image of heart"
+              class="card__button-image"
+            />
+            <img
+              src="./images/Union.svg"
+              alt="image of black heart"
+              class="card__button card__button-inactive"
+              id="card-button-inactive"
+            />
+          </button>
+        </div>
       </div>
-    </div>
-  </template>
-  <script src="./scripts/index.js"></script>
+    </template>
+    <script src="./scripts/index.js"></script>
   </body>
 </html>
