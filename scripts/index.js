@@ -41,26 +41,20 @@ function createCardElelement(card) {
   const cardElement = cardTemplate.cloneNode(true);
   const cardImage = cardElement.querySelector(".card__image");
   const cardTitle = cardElement.querySelector(".card__title");
-  const cardButton = cardElement.querySelector(".card__button-inactive");
+  const cardButton = cardElement.querySelector(".card__title-button");
+  const likeImage = cardElement.querySelector(".card__button");
   cardImage.src = card.link;
   cardImage.alt = card.alt;
   cardTitle.textContent = card.name;
-  cardImage.addEventListener("click", () => {
-    openModal(.modal)
+  cardImage.addEventListener("click", (openModal) => {
+    openModal(modal);
   });
-  //setEventListeners(cardContent); // here you need to send inside ONLY heart icon node
+
+  cardButton.addEventListener("click", () => {
+    likeImage.classList.toggle("card__button-inactive");
+  });
   return cardElement;
 }
-
-// create a function setEventListeners
-/*
-function setEventListeners(cardContent) {
-  // 1. with querySelector you search by the class the heart icopn element
-  // 2. to the element you found you add the event listener
-  // 3. when event listener detects the click on the heart icon - you toggle the active class
-
-  const likeButton = cardContent.querySelector...
-*/
 
 function renderCard(card) {
   placesList.append(createCardElelement(card));
@@ -125,21 +119,3 @@ cardAddForm.addEventListener("submit", function (e) {
   placesList.prepend(newCard);
   closeModal(cardModalElement);
 });
-
-/*const cardLikeButton = document.querySelectorAll(".card__title-button"); //one elemet
-const activeCardButton = document.querySelector(".card__button-inactive");
-
-function likeButton(_cardLikeButton) {
-  activeCardButton.classList.remove("card__button-inactive");
-}
-
-cardLikeButton.addEventListener("click", () => {
-  likeButton(cardLikeButton);
-});
-
-cardLikeButton.forEach((element) => {
-element.addEventListener("click", () => {
-  console.log(element);
-});
-});
-*/
