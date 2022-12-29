@@ -42,16 +42,16 @@ function createCardElelement(card) {
   const cardImage = cardElement.querySelector(".card__image");
   const cardTitle = cardElement.querySelector(".card__title");
   const cardButton = cardElement.querySelector(".card__title-button");
-  const likeImage = cardElement.querySelector(".card__button");
+  const likeImage = cardElement.querySelector(".card__like-image");
   cardImage.src = card.link;
   cardImage.alt = card.alt;
   cardTitle.textContent = card.name;
-  cardImage.addEventListener("click", (openModal) => {
-    openModal(modal);
+  cardImage.addEventListener("click", () => {
+    openModal(modal__open);
   });
 
   cardButton.addEventListener("click", () => {
-    likeImage.classList.toggle("card__button-inactive");
+    likeImage.classList.toggle("card__like-image_active");
   });
   return cardElement;
 }
@@ -70,18 +70,19 @@ const profileNameTitle = document.querySelector(".profile__title");
 const profileJobTitle = document.querySelector(".profile__title-description");
 const nameInput = document.querySelector(".modal__input-name");
 const jobInput = document.querySelector(".modal__input-description");
-
+const imageModal = document.querySelector("#image-modal");
 const cardAddButton = document.querySelector(".profile__button");
 const cardModalElement = document.querySelector("#modal-card-add");
 const cardAddClose = cardModalElement.querySelector(".modal__button-exit");
 const cardAddForm = document.querySelector("#modal-card-form");
+const imageCloseButton = imageModal.querySelector(".modal__button-exit");
 
 function closeModal(modal) {
-  modal.classList.add("modal");
+  modal.classList.remove("modal__open");
 }
 
 function openModal(modal) {
-  modal.classList.remove("modal");
+  modal.classList.add("modal__open");
 }
 
 profileEditOpen.addEventListener("click", () => {
@@ -92,6 +93,10 @@ profileEditOpen.addEventListener("click", () => {
 
 profileModalClose.addEventListener("click", function () {
   closeModal(modalElement);
+});
+
+imageCloseButton.addEventListener("click", function () {
+  closeModal(imageModal);
 });
 
 profileEditForm.addEventListener("submit", function (event) {

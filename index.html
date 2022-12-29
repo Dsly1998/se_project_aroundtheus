@@ -11,13 +11,13 @@
     <link rel="icon" href="favicon.ico" />
   </head>
   <body class="body">
-    <section class="modal modal__open">
+    <section class="modal">
       <div class="modal__container modal__container-open">
         <button class="modal__button-exit" type="button">
           <img
             src="./images/Vector_plus.svg"
             alt="plus"
-            class="modal__button-symbol"
+            class="modal__close-button-image"
           />
         </button>
         <h1 class="modal__title">Edit profile</h1>
@@ -46,13 +46,13 @@
         </form>
       </div>
     </section>
-    <section class="modal modal__open" id="modal-card-add">
+    <section class="modal" id="modal-card-add">
       <div class="modal__container modal__container-open">
         <button class="modal__button-exit id=card-modal-exit" type="button">
           <img
             src="./images/Vector_plus.svg"
             alt="plus"
-            class="modal__button-symbol"
+            class="modal__close-button-image"
           />
         </button>
         <h1 class="modal__title">New place</h1>
@@ -80,20 +80,17 @@
         </form>
       </div>
     </section>
-    <section class="modal modal__open-image">
-      <div class="modal__container_image">
+    <section class="modal" id="image-modal">
+      <div class="modal__image_container">
         <button class="modal__button-exit" type="button">
           <img
             src="./images/Vector_plus.svg"
             alt="plus"
-            class="modal__button-symbol"
+            class="modal__close-button-image"
           />
         </button>
-        <img
-          src="https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg"
-          alt=""
-          class="modal__preview-image"
-        />
+        <img src="" alt="" class="modal__preview-image" />
+        <p class="modal__image-description"></p>
       </div>
     </section>
     <header class="header">
@@ -143,12 +140,12 @@
             <img
               src="./images/Vector_heart_2.svg"
               alt="image of heart"
-              class="card__button-image"
+              class="card__like-image-image"
             />
             <img
               src="./images/Union.svg"
               alt="image of black heart"
-              class="card__button card__button-inactive"
+              class="card__like-image"
               id="card-button-inactive"
             />
           </button>
