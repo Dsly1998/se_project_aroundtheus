@@ -43,13 +43,20 @@ function createCardElelement(card) {
   const cardTitle = cardElement.querySelector(".card__title");
   const cardButton = cardElement.querySelector(".card__title-button");
   const likeImage = cardElement.querySelector(".card__like-image");
+  const imageModal = document.querySelector("#image-modal");
+  const cardPreviewImage = document.querySelector(".modal__preview-image");
+  const modalCardDescription = document.querySelector(
+    ".modal__image-description"
+  );
+  console.log(cardPreviewImage);
   cardImage.src = card.link;
   cardImage.alt = card.alt;
   cardTitle.textContent = card.name;
   cardImage.addEventListener("click", () => {
-    openModal(modal__open);
+    modalCardDescription.textcontent = card.name;
+    cardPreviewImage.src = card.link;
+    openModal(imageModal);
   });
-
   cardButton.addEventListener("click", () => {
     likeImage.classList.toggle("card__like-image_active");
   });
