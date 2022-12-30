@@ -55,7 +55,7 @@ function createCardElelement(card) {
   cardImage.addEventListener("click", () => {
     modalCardDescription.textContent = card.name;
     cardPreviewImage.src = card.link;
-    modalAltText = cardImage.alt;
+    cardPreviewImage.alt = cardImage.alt;
     openModal(imageModal);
   });
   cardButton.addEventListener("click", () => {
@@ -134,5 +134,5 @@ cardAddForm.addEventListener("submit", function (e) {
   const newCard = createCardElelement({ name: name, link: link });
   placesList.prepend(newCard);
   closeModal(cardModalElement);
-  Form.reset();
+  cardAddForm.reset();
 });
