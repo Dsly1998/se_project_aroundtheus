@@ -104,6 +104,7 @@
 .modal__button:hover {
   opacity: 0.7;
   transition: 0.5s;
+  cursor: pointer;
 }
 
 .modal__form {
@@ -178,6 +179,7 @@
 .modal__button-exit:hover {
   opacity: 0.5;
   transition: 0.5s;
+  cursor: pointer;
 }
 
 .modal__close-button-image {
