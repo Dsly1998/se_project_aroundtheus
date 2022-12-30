@@ -1,12 +1,4 @@
 .modal {
-  visibility: hidden;
-  pointer-events: none;
-  opacity: 0;
-  transition: visibility 0s linear 0.3s, opacity 0.3s linear;
-}
-
-.modal__open {
-  background-color: rgba(0, 0, 0, 0.5);
   position: fixed;
   top: 0;
   bottom: 0;
@@ -16,6 +8,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  visibility: hidden;
+  pointer-events: none;
+  opacity: 0;
+  transition: visibility 0s linear 0.3s, opacity 0.3s linear;
+}
+
+.modal__open {
+  background-color: rgba(0, 0, 0, 0.7);
   visibility: visible;
   pointer-events: all;
   opacity: 1;
@@ -23,15 +23,13 @@
 }
 
 .modal__image_container {
-  max-width: 75vw;
-  max-height: 75vh;
   display: flex;
   flex-direction: column;
   position: fixed;
 }
 
 .modal__preview-image {
-  max-width: 100%;
+  max-width: 75vw;
   max-height: 75vh;
   object-fit: cover;
 }
