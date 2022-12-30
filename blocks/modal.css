@@ -22,7 +22,7 @@
   transition-delay: 0s;
 }
 
-.modal__image_container {
+.modal__image-container {
   display: flex;
   flex-direction: column;
   position: fixed;
