@@ -53,7 +53,7 @@ function createCardElelement(card) {
   cardImage.alt = card.alt;
   cardTitle.textContent = card.name;
   cardImage.addEventListener("click", () => {
-    modalCardDescription.textcontent = card.name;
+    modalCardDescription.textContent = card.name;
     cardPreviewImage.src = card.link;
     openModal(imageModal);
   });
