@@ -25,22 +25,28 @@
           <fieldset class="modal__fieldset">
             <label class="modal__label-name"></label>
             <input
-              class="modal__input-name"
+              class="modal__input modal__input-name"
               type="text"
               id="name"
               name="name"
               placeholder="Name"
               required
+              minlength="2"
+              maxlength="40"
             />
+            <span class="modal__error"></span>
             <label class="modal__label-description"></label>
             <input
-              class="modal__input-description"
+              class="modal__input modal__input-description"
               type="text"
               id="description"
               name="description"
               placeholder="Description"
               required
+              minlength="2"
+              maxlength="40"
             />
+            <span class="modal__error"></span>
           </fieldset>
           <fieldset class="modal__fieldset">
             <button class="modal__button" type="submit">Save</button>
@@ -62,7 +68,7 @@
           <fieldset class="modal__fieldset">
             <label class="modal__label-name"></label>
             <input
-              class="modal__input-name"
+              class="modal__input modal__input-name"
               type="text"
               name="name"
               placeholder="Title"
@@ -70,12 +76,14 @@
             />
             <label class="modal__label-description"></label>
             <input
-              class="modal__input-description"
+              class="modal__input modal__input-description"
               type="text"
               id="image-input"
               name="link"
               placeholder="Image link"
               required
+              minlength="2"
+              maxlength="40"
             />
           </fieldset>
           <fieldset class="modal__fieldset">
@@ -160,5 +168,6 @@
       </div>
     </template>
     <script src="./scripts/index.js"></script>
+    <script src="./scripts/validation.js"></script>
   </body>
 </html>
