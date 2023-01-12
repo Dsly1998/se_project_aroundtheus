@@ -1,7 +1,34 @@
-function showInputError() {}
+//
+//
 
-function checkInputValidtity(formElement, inputElements, options) {
-  if (!inputElements.Validtity.valid) {
+function showInputError(
+  formElement,
+  inputElements,
+  { inputErrorClass, errorClass }
+) {
+  const errorMessageElement = formElement.querySelector(
+    "#" + inputElements.id + "-error"
+  );
+  inputElements.classList.add(inputErrorClass);
+  errorMessageElement.textContent = inputElements.validationMessage;
+  errorMessageElement.classList.add(errorClass);
+}
+
+function hideInputError(
+  formElement,
+  inputElements,
+  { inputErrorClass, errorClass }
+) {
+  const errorMessageElement = formElement.querySelector(
+    "#" + inputElements.id + "-error"
+  );
+  inputElements.classList.remove(inputErrorClass);
+  errorMessageElement.textContent = "";
+  errorMessageElement.classList.remove(errorClass);
+}
+
+function checkInputValidity(formElement, inputElements, options) {
+  if (!inputElements.validity.valid) {
     showInputError(formElement, inputElements, options);
   } else {
     hideInputError(formElement, inputElements, options);
@@ -13,7 +40,8 @@ function setEventListeners(formElement, options) {
   const inputElements = [...formElement.querySelectorAll(inputSelector)];
   inputElements.forEach((inputElements) => {
     inputElements.addEventListener("input", (e) => {
-      checkInputValidtity(formElement, inputElements, options);
+      checkInputValidity(formElement, inputElements, options);
+      console.log("listening running");
     });
   });
 }
