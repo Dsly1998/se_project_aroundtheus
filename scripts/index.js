@@ -90,11 +90,48 @@ const imageCloseButton = imageModal.querySelector(".modal__button-exit");
 
 function closeModal(modal) {
   modal.classList.remove("modal__open");
+  modal.querySelector("form").reset();
+  modal.querySelectorAll(".modal__input_type_error").forEach((node) => {
+    node.classList.remove("modal__input_type_error");
+  });
 }
 
 function openModal(modal) {
   modal.classList.add("modal__open");
 }
+
+modalElement.addEventListener("mousedown", (evt) => {
+  if (
+    evt.target.classList.contains("modal") ||
+    evt.target.classList.contains("modal__open")
+  ) {
+    closeModal(modalElement);
+  }
+});
+
+cardModalElement.addEventListener("mousedown", (evt) => {
+  if (
+    evt.target.classList.contains("modal") ||
+    evt.target.classList.contains("modal__open")
+  ) {
+    closeModal(cardModalElement);
+  }
+});
+
+imageModal.addEventListener("mousedown", (evt) => {
+  if (
+    evt.target.classList.contains("modal") ||
+    evt.target.classList.contains("modal__open")
+  ) {
+    closeModal(imageModal);
+  }
+});
+
+modalElement.addEventListener("keypress", (evt) => {
+  if (evt.keycode === 27) {
+    closeModal(modalElement);
+  }
+});
 
 profileEditOpen.addEventListener("click", () => {
   nameInput.value = profileNameTitle.textContent;

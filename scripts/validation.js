@@ -22,30 +22,56 @@ function hideInputError(
   const errorMessageElement = formElement.querySelector(
     "#" + inputElements.id + "-error"
   );
-  inputElements.classList.remove(inputErrorClass);
-  errorMessageElement.textContent = "";
-  errorMessageElement.classList.remove(errorClass);
+
+  if (errorMessageElement) {
+    inputElements.classList.remove(inputErrorClass);
+    errorMessageElement.textContent = "";
+    errorMessageElement.classList.remove(errorClass);
+  }
+  // inputElements.classList.remove(inputErrorClass);
+  // errorMessageElement.textContent = "";
+  // errorMessageElement.classList.remove(errorClass);
 }
 
 function checkInputValidity(formElement, inputElements, options) {
   if (!inputElements.validity.valid) {
-    showInputError(formElement, inputElements, options);
-  } else {
-    hideInputError(formElement, inputElements, options);
+    return showInputError(formElement, inputElements, options);
   }
+  hideInputError(formElement, inputElements, options);
+}
+
+function toggleButtonState(
+  inputElements,
+  submitButton,
+  { inactiveButtonClass }
+) {
+  let foundInvalid = false;
+
+  inputElements.forEach((inputElements) => {
+    if (!inputElements.validity.valid) {
+      foundInvalid = true;
+    }
+  });
+
+  if (foundInvalid) {
+    submitButton.classList.add(inactiveButtonClass);
+    return (submitButton.disabled = true);
+  }
+  submitButton.classList.remove(inactiveButtonClass);
+  submitButton.disabled = false;
 }
 
 function setEventListeners(formElement, options) {
   const { inputSelector } = options;
   const inputElements = [...formElement.querySelectorAll(inputSelector)];
+  const submitButton = formElement.querySelector(".modal__button");
   inputElements.forEach((inputElements) => {
     inputElements.addEventListener("input", (e) => {
       checkInputValidity(formElement, inputElements, options);
-      console.log("listening running");
+      toggleButtonState(inputElements, submitButton, options);
     });
   });
 }
-
 function enableValidation(options) {
   const formElement = [...document.querySelectorAll(options.formSelector)];
   formElement.forEach((formElement) => {
