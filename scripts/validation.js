@@ -22,22 +22,16 @@ function hideInputError(
   const errorMessageElement = formElement.querySelector(
     "#" + inputElements.id + "-error"
   );
-
-  if (errorMessageElement) {
-    inputElements.classList.remove(inputErrorClass);
-    errorMessageElement.textContent = "";
-    errorMessageElement.classList.remove(errorClass);
-  }
-  // inputElements.classList.remove(inputErrorClass);
-  // errorMessageElement.textContent = "";
-  // errorMessageElement.classList.remove(errorClass);
+  inputElements.classList.remove(inputErrorClass);
+  errorMessageElement.textContent = "";
+  errorMessageElement.classList.remove(errorClass);
 }
 
-function checkInputValidity(formElement, inputElements, options) {
-  if (!inputElements.validity.valid) {
-    return showInputError(formElement, inputElements, options);
+function checkInputValidity(formElement, inputElement, options) {
+  if (!inputElement.validity.valid) {
+    return showInputError(formElement, inputElement, options);
   }
-  hideInputError(formElement, inputElements, options);
+  hideInputError(formElement, inputElement, options);
 }
 
 function toggleButtonState(
@@ -47,8 +41,8 @@ function toggleButtonState(
 ) {
   let foundInvalid = false;
 
-  inputElements.forEach((inputElements) => {
-    if (!inputElements.validity.valid) {
+  inputElements.forEach((inputEl) => {
+    if (!inputEl.validity.valid) {
       foundInvalid = true;
     }
   });
@@ -65,9 +59,9 @@ function setEventListeners(formElement, options) {
   const { inputSelector } = options;
   const inputElements = [...formElement.querySelectorAll(inputSelector)];
   const submitButton = formElement.querySelector(".modal__button");
-  inputElements.forEach((inputElements) => {
-    inputElements.addEventListener("input", (e) => {
-      checkInputValidity(formElement, inputElements, options);
+  inputElements.forEach((inputEl) => {
+    inputEl.addEventListener("input", (e) => {
+      checkInputValidity(formElement, inputEl, options);
       toggleButtonState(inputElements, submitButton, options);
     });
   });

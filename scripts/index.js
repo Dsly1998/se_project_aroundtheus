@@ -127,9 +127,24 @@ imageModal.addEventListener("mousedown", (evt) => {
   }
 });
 
-modalElement.addEventListener("keypress", (evt) => {
-  if (evt.keycode === 27) {
+document.addEventListener("keydown", (evt) => {
+  console.log(evt.key);
+  if (evt.key === "Escape") {
     closeModal(modalElement);
+  }
+});
+
+document.addEventListener("keydown", (evt) => {
+  console.log(evt.key);
+  if (evt.key === "Escape") {
+    closeModal(cardModalElement);
+  }
+});
+
+document.addEventListener("keydown", (evt) => {
+  console.log(evt.key);
+  if (evt.key === "Escape") {
+    closeModal(imageModal);
   }
 });
 
