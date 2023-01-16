@@ -109,24 +109,6 @@
   padding-bottom: 13px;
 }
 
-.modal__button_disabled {
-  width: 358px;
-  height: 50px;
-  background: #ffffff;
-  border-radius: 2px;
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 22px;
-  text-align: center;
-  color: #000000;
-  border-color: rgba(0, 0, 0, 1);
-  margin: auto;
-  margin-top: 48px;
-  opacity: 0.2;
-}
-
 .modal__button {
   width: 358px;
   height: 50px;
@@ -144,6 +126,16 @@
   margin-top: 48px;
 }
 
+.modal__button_disabled {
+  box-sizing: border-box;
+  width: 358px;
+  height: 50.15px;
+  opacity: 0.2;
+  border: 1px solid #000000;
+  border-radius: 2px;
+  background: #e5e5e5;
+  color: rgba(0, 0, 0, 1);
+}
 .modal__button:hover {
   opacity: 0.7;
   transition: 0.5s;
