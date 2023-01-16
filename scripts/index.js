@@ -90,10 +90,6 @@ const imageCloseButton = imageModal.querySelector(".modal__button-exit");
 
 function closeModal(modal) {
   modal.classList.remove("modal__open");
-  modal.querySelector("form").reset();
-  modal.querySelectorAll(".modal__input_type_error").forEach((node) => {
-    node.classList.remove("modal__input_type_error");
-  });
 }
 
 function openModal(modal) {
