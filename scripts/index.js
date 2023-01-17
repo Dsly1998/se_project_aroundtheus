@@ -73,8 +73,8 @@ function renderCard(card) {
 initialCards.forEach(renderCard);
 
 const profileEditOpen = document.querySelector(".profile__button-edit");
-const modalElement = document.querySelector("#modal-add");
-const profileModalClose = modalElement.querySelector(".modal__button-exit");
+const profileModal = document.querySelector("#modal-add");
+const profileModalClose = profileModal.querySelector(".modal__button-exit");
 const profileEditForm = document.querySelector("#modal-edit-form");
 const profileNameTitle = document.querySelector(".profile__title");
 const profileJobTitle = document.querySelector(".profile__title-description");
@@ -97,12 +97,12 @@ function openModal(modal) {
   document.addEventListener("keydown", closeByEscape);
 }
 
-modalElement.addEventListener("mousedown", (evt) => {
+profileModal.addEventListener("mousedown", (evt) => {
   if (
     evt.target.classList.contains("modal") ||
     evt.target.classList.contains("modal__open")
   ) {
-    closeModal(modalElement);
+    closeModal(profileModal);
   }
 });
 
@@ -134,11 +134,11 @@ function closeByEscape(evt) {
 profileEditOpen.addEventListener("click", () => {
   nameInput.value = profileNameTitle.textContent;
   jobInput.value = profileJobTitle.textContent;
-  openModal(modalElement);
+  openModal(profileModal);
 });
 
 profileModalClose.addEventListener("click", function () {
-  closeModal(modalElement);
+  closeModal(profileModal);
 });
 
 imageCloseButton.addEventListener("click", function () {
@@ -151,7 +151,7 @@ profileEditForm.addEventListener("submit", function (event) {
   const descriptionValue = event.target.description.value;
   profileNameTitle.textContent = nameValue;
   profileJobTitle.textContent = descriptionValue;
-  closeModal(modalElement);
+  closeModal(profileModal);
 });
 
 cardAddButton.addEventListener("click", () => {

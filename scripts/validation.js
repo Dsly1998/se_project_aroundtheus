@@ -59,15 +59,17 @@ function setEventListeners(formElement, options) {
   const { inputSelector, submitButtonSelector } = options;
   const inputElements = [...formElement.querySelectorAll(inputSelector)];
   const submitButton = formElement.querySelector(submitButtonSelector);
+  submitButton.disabled = true;
+  toggleButtonState(inputElements, submitButton, options);
+  formElement.addEventListener("reset", () => {
+    setTimeout(() => {
+      toggleButtonState(inputElements, submitButton, options);
+    }, 0);
+  });
   inputElements.forEach((inputEl) => {
     inputEl.addEventListener("input", (e) => {
       checkInputValidity(formElement, inputEl, options);
       toggleButtonState(inputElements, submitButton, options);
-      formElement.addEventListener("reset", () => {
-        setTimeout(() => {
-          toggleButtonState(inputElements, submitButton, options);
-        }, 0);
-      });
     });
   });
 }
