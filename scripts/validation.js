@@ -63,6 +63,11 @@ function setEventListeners(formElement, options) {
     inputEl.addEventListener("input", (e) => {
       checkInputValidity(formElement, inputEl, options);
       toggleButtonState(inputElements, submitButton, options);
+      formElement.addEventListener("reset", () => {
+        setTimeout(() => {
+          toggleButtonState(inputElements, submitButton, options);
+        }, 0);
+      });
     });
   });
 }
