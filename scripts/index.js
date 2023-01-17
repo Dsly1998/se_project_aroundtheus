@@ -37,7 +37,6 @@ function createCardElelement(card) {
   const cardTemplate = document
     .querySelector("#card-template")
     .content.querySelector(".card__content");
-  const cardContent = document.querySelector(".card__content");
   const cardElement = cardTemplate.cloneNode(true);
   const cardImage = cardElement.querySelector(".card__image");
   const cardTitle = cardElement.querySelector(".card__title");
@@ -71,10 +70,10 @@ function renderCard(card) {
   placesList.append(createCardElelement(card));
 }
 
-initialCards.forEach((card) => renderCard(card, placesList));
+initialCards.forEach(renderCard);
 
 const profileEditOpen = document.querySelector(".profile__button-edit");
-const modalElement = document.querySelector(".modal");
+const modalElement = document.querySelector("#modal-add");
 const profileModalClose = modalElement.querySelector(".modal__button-exit");
 const profileEditForm = document.querySelector("#modal-edit-form");
 const profileNameTitle = document.querySelector(".profile__title");
@@ -90,10 +89,12 @@ const imageCloseButton = imageModal.querySelector(".modal__button-exit");
 
 function closeModal(modal) {
   modal.classList.remove("modal__open");
+  document.removeEventListener("keydown", closeByEscape);
 }
 
 function openModal(modal) {
   modal.classList.add("modal__open");
+  document.addEventListener("keydown", closeByEscape);
 }
 
 modalElement.addEventListener("mousedown", (evt) => {
@@ -123,26 +124,12 @@ imageModal.addEventListener("mousedown", (evt) => {
   }
 });
 
-document.addEventListener("keydown", (evt) => {
-  console.log(evt.key);
+function closeByEscape(evt) {
   if (evt.key === "Escape") {
-    closeModal(modalElement);
+    const openedModal = document.querySelector(".modal__open");
+    closeModal(openedModal);
   }
-});
-
-document.addEventListener("keydown", (evt) => {
-  console.log(evt.key);
-  if (evt.key === "Escape") {
-    closeModal(cardModalElement);
-  }
-});
-
-document.addEventListener("keydown", (evt) => {
-  console.log(evt.key);
-  if (evt.key === "Escape") {
-    closeModal(imageModal);
-  }
-});
+}
 
 profileEditOpen.addEventListener("click", () => {
   nameInput.value = profileNameTitle.textContent;
