@@ -1,3 +1,10 @@
+import {
+  closeByEscape,
+  closeModal,
+  openModal,
+  clickOutProfileModal,
+} from "./utils.js";
+
 const initialCards = [
   {
     name: "Yosemite Valley",
@@ -33,7 +40,7 @@ const initialCards = [
 
 const placesList = document.querySelector(".card");
 
-function createCardElelement(card) {
+function createCardElement(card) {
   const cardTemplate = document
     .querySelector("#card-template")
     .content.querySelector(".card__content");
@@ -67,7 +74,7 @@ function createCardElelement(card) {
 }
 
 function renderCard(card) {
-  placesList.append(createCardElelement(card));
+  placesList.append(createCardElement(card));
 }
 
 initialCards.forEach(renderCard);
@@ -86,16 +93,6 @@ const cardModalElement = document.querySelector("#modal-card-add");
 const cardAddClose = cardModalElement.querySelector(".modal__button-exit");
 const cardAddForm = document.querySelector("#modal-card-form");
 const imageCloseButton = imageModal.querySelector(".modal__button-exit");
-
-function closeModal(modal) {
-  modal.classList.remove("modal__open");
-  document.removeEventListener("keydown", closeByEscape);
-}
-
-function openModal(modal) {
-  modal.classList.add("modal__open");
-  document.addEventListener("keydown", closeByEscape);
-}
 
 profileModal.addEventListener("mousedown", (evt) => {
   if (
@@ -123,13 +120,6 @@ imageModal.addEventListener("mousedown", (evt) => {
     closeModal(imageModal);
   }
 });
-
-function closeByEscape(evt) {
-  if (evt.key === "Escape") {
-    const openedModal = document.querySelector(".modal__open");
-    closeModal(openedModal);
-  }
-}
 
 profileEditOpen.addEventListener("click", () => {
   nameInput.value = profileNameTitle.textContent;
@@ -166,7 +156,7 @@ cardAddForm.addEventListener("submit", function (e) {
   e.preventDefault();
   const name = e.target.name.value;
   const link = e.target.link.value;
-  const newCard = createCardElelement({ name: name, link: link });
+  const newCard = createCardElement({ name: name, link: link });
   placesList.prepend(newCard);
   closeModal(cardModalElement);
   cardAddForm.reset();
