@@ -1,9 +1,4 @@
-import {
-  closeByEscape,
-  closeModal,
-  openModal,
-  clickOutProfileModal,
-} from "./utils.js";
+import { closeByEscape, closeModal, openModal } from "./utils.js";
 
 const initialCards = [
   {
