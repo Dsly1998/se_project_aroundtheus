@@ -35,42 +35,13 @@ const initialCards = [
 ];
 
 const placesList = document.querySelector(".card");
+const cardSelector = document
+  .querySelector("#card-template")
+  .content.querySelector(".card__content")
+  .cloneNode(true);
 
-function createCardElement(data) {
-  const cardSelector = document
-    .querySelector("#card-template")
-    .content.querySelector(".card__content");
-  const cardElement = cardSelector.cloneNode(true);
-  const cardImage = cardElement.querySelector(".card__image");
-  const cardTitle = cardElement.querySelector(".card__title");
-  const cardLikeButton = cardElement.querySelector(".card__title-button");
-  const likeImage = cardElement.querySelector(".card__like-image");
-  const deleteCardButton = cardElement.querySelector(".card__delete-button");
-  const imageModal = document.querySelector("#image-modal");
-  const cardPreviewImage = document.querySelector(".modal__preview-image");
-  const modalCardDescription = document.querySelector(
-    ".modal__image-description"
-  );
-  cardImage.src = data.link;
-  cardImage.alt = data.alt;
-  cardTitle.textContent = data.name;
-  cardImage.addEventListener("click", () => {
-    modalCardDescription.textContent = data.name;
-    cardPreviewImage.src = data.link;
-    cardPreviewImage.alt = cardImage.alt;
-    openModal(imageModal);
-  });
-  cardLikeButton.addEventListener("click", () => {
-    likeImage.classList.toggle("card__like-image_active");
-  });
-  deleteCardButton.addEventListener("click", () => {
-    cardElement.remove();
-  });
-  return cardElement;
-}
-
-function renderCard(card) {
-  placesList.append(createCardElement(card));
+function renderCard(data) {
+  placesList.append(new Card(data, cardSelector));
 }
 
 initialCards.forEach(renderCard);
@@ -152,7 +123,7 @@ cardAddForm.addEventListener("submit", function (e) {
   e.preventDefault();
   const name = e.target.name.value;
   const link = e.target.link.value;
-  const newCard = createCardElement({ name: name, link: link });
+  const newCard = new Card({ name: name, link: link });
   placesList.prepend(newCard);
   closeModal(cardModalElement);
   cardAddForm.reset();
