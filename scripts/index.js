@@ -1,3 +1,4 @@
+import Card from "./Card.js";
 import { closeByEscape, closeModal, openModal } from "./utils.js";
 
 const initialCards = [
@@ -35,14 +36,14 @@ const initialCards = [
 
 const placesList = document.querySelector(".card");
 
-function createCardElement(card) {
-  const cardTemplate = document
+function createCardElement(data) {
+  const cardSelector = document
     .querySelector("#card-template")
     .content.querySelector(".card__content");
-  const cardElement = cardTemplate.cloneNode(true);
+  const cardElement = cardSelector.cloneNode(true);
   const cardImage = cardElement.querySelector(".card__image");
   const cardTitle = cardElement.querySelector(".card__title");
-  const cardButton = cardElement.querySelector(".card__title-button");
+  const cardLikeButton = cardElement.querySelector(".card__title-button");
   const likeImage = cardElement.querySelector(".card__like-image");
   const deleteCardButton = cardElement.querySelector(".card__delete-button");
   const imageModal = document.querySelector("#image-modal");
@@ -50,16 +51,16 @@ function createCardElement(card) {
   const modalCardDescription = document.querySelector(
     ".modal__image-description"
   );
-  cardImage.src = card.link;
-  cardImage.alt = card.alt;
-  cardTitle.textContent = card.name;
+  cardImage.src = data.link;
+  cardImage.alt = data.alt;
+  cardTitle.textContent = data.name;
   cardImage.addEventListener("click", () => {
-    modalCardDescription.textContent = card.name;
-    cardPreviewImage.src = card.link;
+    modalCardDescription.textContent = data.name;
+    cardPreviewImage.src = data.link;
     cardPreviewImage.alt = cardImage.alt;
     openModal(imageModal);
   });
-  cardButton.addEventListener("click", () => {
+  cardLikeButton.addEventListener("click", () => {
     likeImage.classList.toggle("card__like-image_active");
   });
   deleteCardButton.addEventListener("click", () => {
