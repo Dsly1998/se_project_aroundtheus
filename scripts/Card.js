@@ -1,11 +1,15 @@
+import { closeByEscape, closeModal, openModal } from "./utils.js";
+
 class Card {
   constructor(data, cardSelector) {
     this._name = data.name;
     this._link = data.link;
+    this._alt = data.name;
     this._cardSelector = cardSelector;
+    this._imageModal = document.querySelector("#image-modal");
   }
 
-  _setEventListeners() {
+  _setEventListeners(_handleLikeButton) {
     this.element
       .querySelector(".card__title-button")
       .addEventListener("click", () => this._handleLikeButton());
@@ -21,7 +25,7 @@ class Card {
 
   _handleLikeButton() {
     this.element
-      .querySelector(".card__title-button")
+      .querySelector(".card__like-image")
       .classList.toggle("card__like-image_active");
   }
 
@@ -30,15 +34,16 @@ class Card {
   }
 
   _handleImagePreviw() {
-    document.querySelector(".modal__image-description").textContent = data.name;
-    document.querySelector(".modal__preview-image").src = data.link;
-    document.querySelector(".modal__preview-image").alt = cardImage.alt;
-    openModal(imageModal);
+    document.querySelector(".modal__image-description").textContent =
+      this._name;
+    document.querySelector(".modal__preview-image").src = this._link;
+    document.querySelector(".modal__preview-image").alt = this._alt;
+    openModal(this._imageModal);
   }
 
   _getTemplate() {
     return document
-      .querySelector(this._cardSelector)
+      .querySelector("#card-template")
       .content.querySelector(".card__content")
       .cloneNode(true);
   }
@@ -46,11 +51,13 @@ class Card {
   getView() {
     this.element = this._getTemplate();
 
-    this.element.querySelector(".card__image").src = data.link;
-    this.element.querySelector(".card__image").alt = data.alt;
-    this.element.querySelector(".card__title").textContent = data.name;
+    this.element.querySelector(".card__image").src = this._link;
+    this.element.querySelector(".card__image").alt = this._alt;
+    this.element.querySelector(".card__title").textContent = this._name;
 
     this._setEventListeners();
+
+    return this.element;
   }
 }
 

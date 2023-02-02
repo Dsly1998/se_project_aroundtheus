@@ -35,13 +35,10 @@ const initialCards = [
 ];
 
 const placesList = document.querySelector(".card");
-const cardSelector = document
-  .querySelector("#card-template")
-  .content.querySelector(".card__content")
-  .cloneNode(true);
 
 function renderCard(data) {
-  placesList.append(new Card(data, cardSelector));
+  const card = new Card(data);
+  placesList.append(card.getView());
 }
 
 initialCards.forEach(renderCard);
@@ -123,8 +120,8 @@ cardAddForm.addEventListener("submit", function (e) {
   e.preventDefault();
   const name = e.target.name.value;
   const link = e.target.link.value;
-  const newCard = new Card({ name: name, link: link });
-  placesList.prepend(newCard);
+  const card = new Card({ name: name, link: link });
+  placesList.prepend(card.getView());
   closeModal(cardModalElement);
   cardAddForm.reset();
 });
