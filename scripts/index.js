@@ -36,9 +36,10 @@ const initialCards = [
 ];
 
 const placesList = document.querySelector(".card");
+const cardSelector = document.querySelector("#card-template");
 
 function renderCard(data) {
-  const card = new Card(data);
+  const card = new Card(data, "#card-template");
   placesList.append(card.getView());
 }
 
@@ -136,7 +137,7 @@ cardAddForm.addEventListener("submit", function (e) {
   e.preventDefault();
   const name = e.target.name.value;
   const link = e.target.link.value;
-  const card = new Card({ name: name, link: link });
+  const card = new Card({ name: name, link: link }, "#card-template");
   placesList.prepend(card.getView());
   closeModal(cardModalElement);
   cardAddForm.reset();

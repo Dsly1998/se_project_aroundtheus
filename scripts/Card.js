@@ -1,10 +1,11 @@
 import { openModal } from "./utils.js";
 
 class Card {
-  constructor(data) {
+  constructor(data, cardSelector) {
     this._name = data.name;
     this._link = data.link;
     this._alt = data.name;
+    this._cardSelector = cardSelector;
     this._imageModal = document.querySelector("#image-modal");
   }
 
@@ -41,8 +42,9 @@ class Card {
   }
 
   _getTemplate() {
+    console.log(this._cardSelector);
     return document
-      .querySelector("#card-template")
+      .querySelector(this._cardSelector)
       .content.querySelector(".card__content")
       .cloneNode(true);
   }
