@@ -1,4 +1,5 @@
 import Card from "./Card.js";
+import FormValidator from "./FormValidator.js";
 import { closeByEscape, closeModal, openModal } from "./utils.js";
 
 const initialCards = [
@@ -35,9 +36,10 @@ const initialCards = [
 ];
 
 const placesList = document.querySelector(".card");
+const cardSelector = "#card-template";
 
 function renderCard(data) {
-  const card = new Card(data);
+  const card = new Card(data, cardSelector);
   placesList.append(card.getView());
 }
 
@@ -57,6 +59,21 @@ const cardModalElement = document.querySelector("#modal-card-add");
 const cardAddClose = cardModalElement.querySelector(".modal__button-exit");
 const cardAddForm = document.querySelector("#modal-card-form");
 const imageCloseButton = imageModal.querySelector(".modal__button-exit");
+
+const settings = {
+  formSelector: ".modal__form",
+  inputSelector: ".modal__input",
+  submitButtonSelector: ".modal__button",
+  inactiveButtonClass: "modal__button_disabled",
+  inputErrorClass: "modal__input_type_error",
+  errorClass: "modal__error-visible",
+};
+const addformElement = document.querySelector("#modal-card-form");
+const addEditFormEl = document.querySelector("#modal-edit-form");
+const addFormValidator = new FormValidator(settings, addformElement);
+const addeditFormValidator = new FormValidator(settings, addEditFormEl);
+addFormValidator.enableValidation();
+addeditFormValidator.enableValidation();
 
 profileModal.addEventListener("mousedown", (evt) => {
   if (

@@ -1,4 +1,4 @@
-import { closeByEscape, closeModal, openModal } from "./utils.js";
+import { openModal } from "./utils.js";
 
 class Card {
   constructor(data, cardSelector) {
@@ -43,7 +43,7 @@ class Card {
 
   _getTemplate() {
     return document
-      .querySelector("#card-template")
+      .querySelector(this._cardSelector)
       .content.querySelector(".card__content")
       .cloneNode(true);
   }
