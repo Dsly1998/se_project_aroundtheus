@@ -1,7 +1,7 @@
 import { openModal } from "./utils.js";
 
 class Card {
-  constructor(data, cardSelector) {
+  constructor(data) {
     this._name = data.name;
     this._link = data.link;
     this._alt = data.name;
