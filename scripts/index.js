@@ -36,10 +36,9 @@ const initialCards = [
 ];
 
 const placesList = document.querySelector(".card");
-const cardSelector = "#card-template";
 
 function renderCard(data) {
-  const card = new Card(data, cardSelector);
+  const card = new Card(data);
   placesList.append(card.getView());
 }
 

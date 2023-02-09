@@ -5,7 +5,6 @@ class Card {
     this._name = data.name;
     this._link = data.link;
     this._alt = data.name;
-    this._cardSelector = cardSelector;
     this._imageModal = document.querySelector("#image-modal");
   }
 
@@ -43,7 +42,7 @@ class Card {
 
   _getTemplate() {
     return document
-      .querySelector(this._cardSelector)
+      .querySelector("#card-template")
       .content.querySelector(".card__content")
       .cloneNode(true);
   }
