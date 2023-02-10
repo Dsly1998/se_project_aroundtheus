@@ -36,7 +36,6 @@ const initialCards = [
 ];
 
 const placesList = document.querySelector(".card");
-const cardSelector = document.querySelector("#card-template");
 
 function renderCard(data) {
   const card = new Card(data, "#card-template");
