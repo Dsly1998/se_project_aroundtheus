@@ -7,7 +7,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Around The US</title>
-    <link rel="stylesheet" href="./pages/index.css" />
     <link rel="icon" href="favicon.ico" />
   </head>
   <body class="body">
@@ -15,7 +14,7 @@
       <div class="modal__container modal__container-open">
         <button class="modal__button-exit" type="button">
           <img
-            src="./images/Vector_plus.svg"
+            src="<%=require('./images/Vector_plus.svg')%>"
             alt="plus"
             class="modal__close-button-image"
           />
@@ -59,7 +58,7 @@
       <div class="modal__container modal__container-open">
         <button class="modal__button-exit id=card-modal-exit" type="button">
           <img
-            src="./images/Vector_plus.svg"
+            src="<%=require('./images/Vector_plus.svg')%>"
             alt="plus"
             class="modal__close-button-image"
           />
@@ -100,7 +99,7 @@
       <div class="modal__image-container">
         <button class="modal__button-exit" type="button">
           <img
-            src="./images/Vector_plus.svg"
+            src="<%=require('./images/Vector_plus.svg')%>"
             alt="plus"
             class="modal__close-button-image"
           />
@@ -111,7 +110,7 @@
     </section>
     <header class="header">
       <img
-        src="./images/Vector_logo.svg"
+        src="<%=require('./images/Vector_logo.svg')%>"
         alt="photo of logo"
         class="header__logo"
       />
@@ -119,7 +118,7 @@
     <main class="page">
       <section class="profile">
         <img
-          src="./images/jacques-cousteau.png"
+          src="<%=require('./images/jacques-cousteau.png')%>"
           alt="photo of jacques-cousteau"
           class="profile__image"
         />
@@ -127,7 +126,7 @@
           <h1 class="profile__title">Jacques Cousteau</h1>
           <button class="profile__button-edit" type="button">
             <img
-              src="./images/Vector_pen.svg"
+              src="<%=require('./images/Vector_pen.svg')%>"
               alt="image of editor pen"
               class="profile__button-image"
             />
@@ -136,7 +135,7 @@
         </div>
         <button class="profile__button" type="button">
           <img
-            src="./images/Vector_plus.svg"
+            src="<%=require('./images/Vector_plus.svg')%>"
             alt="plus"
             class="profile__button-symbol"
           />
@@ -150,18 +149,23 @@
     <template id="card-template">
       <div class="card__content" id="card-content">
         <button type="button" class="card__delete-button">
-          <img src="./images/trash-can.svg" alt="" class="card__trash-icon" />
+          <img
+            src="<%=require('./images/trash-can.svg')%>"
+            alt=""
+            class="card__trash-icon"
+          />
         </button>
         <img class="card__image" />
         <div class="card__title-bar">
           <h2 class="card__title"></h2>
           <button class="card__title-button" type="button">
             <img
-              src="./images/Vector_heart_2.svg"
+              src="<%=require('./images/Vector_heart_2.svg')%>"
               alt="image of heart"
               class="card__like-image-image"
             />
             <img
+              src="<%=require('./images/Union.svg')%>"
               src="./images/Union.svg"
               alt="image of black heart"
               class="card__like-image"
@@ -171,6 +175,6 @@
         </div>
       </div>
     </template>
-    <script type="module" src="./scripts/index.js"></script>
+    <script type="module" src="./pages/index.js"></script>
   </body>
 </html>
