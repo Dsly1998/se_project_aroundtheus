@@ -9,7 +9,7 @@ class Card {
     this._imageModal = document.querySelector("#image-modal");
   }
 
-  _setEventListeners(_handleLikeButton) {
+  _setEventListeners() {
     this.element
       .querySelector(".card__title-button")
       .addEventListener("click", () => this._handleLikeButton());

@@ -2,6 +2,8 @@ import "../pages/index.css";
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import { closeByEscape, closeModal, openModal } from "../components/utils.js";
+import Popup from "../components/popup";
+import PopupWithForm from "../components/PopupWithForm";
 
 const initialCards = [
   {
@@ -36,6 +38,10 @@ const initialCards = [
   },
 ];
 
+const popupConfig = {
+  editFormPopupSelector: "#modal-add",
+};
+
 const placesList = document.querySelector(".card");
 
 function renderCard(data) {
@@ -46,18 +52,18 @@ function renderCard(data) {
 initialCards.forEach(renderCard);
 
 const profileEditOpen = document.querySelector(".profile__button-edit");
-const profileModal = document.querySelector("#modal-add");
+const profileModal = document.querySelector("#modal-add"); //pop
 const profileModalClose = profileModal.querySelector(".modal__button-exit");
-const profileEditForm = document.querySelector("#modal-edit-form");
+const profileEditForm = document.querySelector("#modal-edit-form"); //section
 const profileNameTitle = document.querySelector(".profile__title");
 const profileJobTitle = document.querySelector(".profile__title-description");
 const nameInput = document.querySelector("#name");
 const jobInput = document.querySelector("#description");
-const imageModal = document.querySelector("#image-modal");
+const imageModal = document.querySelector("#image-modal"); //img
 const cardAddButton = document.querySelector(".profile__button");
-const cardModalElement = document.querySelector("#modal-card-add");
+const cardModalElement = document.querySelector("#modal-card-add"); //form
 const cardAddClose = cardModalElement.querySelector(".modal__button-exit");
-const cardAddForm = document.querySelector("#modal-card-form");
+const cardAddForm = document.querySelector("#modal-card-form"); //section
 const imageCloseButton = imageModal.querySelector(".modal__button-exit");
 
 const settings = {
@@ -68,20 +74,17 @@ const settings = {
   inputErrorClass: "modal__input_type_error",
   errorClass: "modal__error-visible",
 };
-const addformElement = document.querySelector("#modal-card-form");
-const addEditFormEl = document.querySelector("#modal-edit-form");
-const addFormValidator = new FormValidator(settings, addformElement);
-const addeditFormValidator = new FormValidator(settings, addEditFormEl);
+
+const addFormValidator = new FormValidator(settings, cardAddForm);
+const addeditFormValidator = new FormValidator(settings, profileEditForm);
 addFormValidator.enableValidation();
 addeditFormValidator.enableValidation();
 
-profileModal.addEventListener("mousedown", (evt) => {
-  if (
-    evt.target.classList.contains("modal") ||
-    evt.target.classList.contains("modal__open")
-  ) {
-    closeModal(profileModal);
-  }
+const userInfoPopup = new PopupWithForm({
+  popupSelector: popupConfig.editFormPopupSelector,
+  handleFormSubmit: () => {
+    console.log("handleFormSubmit");
+  },
 });
 
 cardModalElement.addEventListener("mousedown", (evt) => {
