@@ -1,16 +1,17 @@
-class section {
-    constructor(items, {renderer}){
-        this._name = items.name;
-        this._link = items.link;
-        this._alt = items.alt
-        this.renderItems = renderer
-    }
+export default class Section {
+  constructor({ items, renderer }, elementContainer) {
+    this._items = items;
+    this._renderer = renderer;
+    this._container = elementContainer;
+  }
+
+  addItem(item) {
+    this._container.prepend(this._renderer(item));
+  }
+
+  renderItems(items) {
+    items.forEach((item) => {
+      this._container.append(this._renderer(item));
+    });
+  }
 }
-this.renderItems.addEventListener("submit", function (e) {
-    e.preventDefault();
-    const card = new Card(this._name, this._link, "#card-template");
-    placesList.prepend(card.getView());
-    closeModal(cardModalElement);
-    cardAddForm.reset();
-  });
-  

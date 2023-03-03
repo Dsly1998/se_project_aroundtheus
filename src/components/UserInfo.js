@@ -1,16 +1,18 @@
-/*class UserInfo {
-    constructor(nameValue, descrtiptionValue){
-       this._name = nameValue;
-       this._description = descrtiptionValue
-    }
+export default class UserInfo {
+  constructor({ nameSelector, titleSelector }) {
+    this._namevalue = document.querySelector(nameSelector);
+    this._descriptionvalue = document.querySelector(titleSelector);
+  }
 
+  getUserInfo() {
+    return {
+      name: this._nameSelector.textcontent,
+      descrtiption: this._titleSelector,
+    };
+  }
 
-
-    profileEditForm.addEventListener("submit", function (event) {
-        event.preventDefault();
-        const nameValue = event.target.name.value;
-        const descriptionValue = event.target.description.value;
-        profileNameTitle.textContent = nameValue;
-        profileJobTitle.textContent = descriptionValue;
-        close();
-      });*/
+  setUserInfo({ name, descrtiption }) {
+    this._namevalue.textcontent = name;
+    this._descriptionvalue.textcontent = descrtiption;
+  }
+}

@@ -230,6 +230,7 @@
     color: #000000;
     padding-top: 25px;
     padding-left: 22px;
+    margin-bottom: 40px;
   }
 
   .modal__input-name {
@@ -242,6 +243,8 @@
 
   .modal__button {
     width: 238px;
+    margin-top: 38px;
+    margin-bottom: 30px;
   }
 
   .modal__label-description {
@@ -261,5 +264,16 @@
   .modal__close-button-image {
     width: 26px;
     height: 26px;
+  }
+
+  .modal__input {
+    width: 238px;
+    margin-bottom: 24px;
+  }
+
+  .modal__fieldset {
+    display: inline-block;
+    margin: 0;
+    padding-left: 22px;
   }
 }
