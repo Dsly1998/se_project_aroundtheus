@@ -178,11 +178,11 @@ cardAddClose.addEventListener("click", function () {
 const openProfileEdit = () => {
   profileNameTitle.value = userInfo.getUserInfo().name;
   profileJobTitle.value = userInfo.getUserInfo().descrtiption;
-  Popup.open();
+  profileModal.open;
 };
 
 profileEditOpen.addEventListener("click", openProfileEdit);
 
 cardAddButton.addEventListener("click", () => {
-  Popup.open();
+  cardAddForm.open;
 });
