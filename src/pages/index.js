@@ -43,6 +43,7 @@ const initialCards = [
 
 const popupConfig = {
   editFormPopupSelector: "#modal-add",
+  addCardPopupSelector: "#modal-card-add",
 };
 
 const placesList = document.querySelector(".card");
@@ -93,8 +94,6 @@ const addeditFormValidator = new FormValidator(settings, profileEditForm);
 addFormValidator.enableValidation();
 addeditFormValidator.enableValidation();
 
-const editPopup = new Popup({ popupSelector: "#modal-add" });
-
 const userInfo = new UserInfo({
   nameSelector: "#name",
   titleSelector: "#description",
@@ -109,6 +108,13 @@ const formPopup = new PopupWithForm({
   },
 });
 
+const addCardPopup = new PopupWithForm({
+  popupSelector: popupConfig.addCardPopupSelector,
+  handleFormSubmit: (data) => {
+    
+    userInfo.setUserInfo({});
+  },
+});
 const section = new Section(
   {
     renderer: (data) => {
@@ -125,14 +131,14 @@ function reneder(data) {
   placesList.append(card.getView());
 }
 
-editPopup.setEventListener();
+formPopup.setEventListener();
 
 cardPreview.setEventListener();
 
-formPopup.setEventListener();
+addCardPopup.setEventListener();
 
 profileModalClose.addEventListener("click", function () {
-  editPopup.close();
+  formPopup.close();
 });
 
 imageCloseButton.addEventListener("click", function () {
@@ -155,11 +161,11 @@ cardAddClose.addEventListener("click", function () {
 const openProfileEdit = () => {
   profileNameTitle.value = userInfo.getUserInfo().name;
   profileJobTitle.value = userInfo.getUserInfo().descrtiption;
-  editPopup.open();
+  formPopup.open();
 };
 
 profileEditOpen.addEventListener("click", openProfileEdit);
 
 //cardAddButton.addEventListener("click", () => {
-  //openModal(cardModalElement);
+//openModal(cardModalElement);
 //});
