@@ -24,11 +24,11 @@ export default class Popup {
 
   open() {
     this._popupElement.classList.add("modal__open");
-    document.addEventListener("keydown", this._handleEscUp);
+    document.addEventListener("keydown", this._handleEscUp());
   }
 
   close() {
     this._popupElement.classList.remove("modal__open");
-    document.addEventListener("keydown", this._handleEscUp);
+    document.addEventListener("keydown", this._handleEscUp());
   }
 }
