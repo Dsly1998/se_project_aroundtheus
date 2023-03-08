@@ -20,11 +20,6 @@ export default class Popup {
         this.close();
       }
     });
-
-    this._popupElement.addEventListener("click", function () {
-      this.close();
-    });
-    
   }
 
   open() {

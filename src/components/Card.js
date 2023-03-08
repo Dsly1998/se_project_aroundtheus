@@ -5,6 +5,7 @@ class Card {
     this._name = data.name;
     this._link = data.link;
     this._alt = data.name;
+    this._handleImageClick = data.handleImageClick;
     this._cardSelector = cardSelector;
     this._imageModal = document.querySelector("#image-modal");
   }
@@ -20,7 +21,9 @@ class Card {
 
     this.element
       .querySelector(".card__image")
-      .addEventListener("click", () => this._handleImagePreviw());
+      .addEventListener("click", () =>
+        this._handleImageClick(this._name, this._link)
+      );
   }
 
   _handleLikeButton() {
@@ -31,14 +34,6 @@ class Card {
 
   _handleDeleteButton() {
     this.element.remove();
-  }
-
-  _handleImagePreviw() {
-    document.querySelector(".modal__image-description").textContent =
-      this._name;
-    document.querySelector(".modal__preview-image").src = this._link;
-    document.querySelector(".modal__preview-image").alt = this._alt;
-    openModal(this._imageModal);
   }
 
   _getTemplate() {

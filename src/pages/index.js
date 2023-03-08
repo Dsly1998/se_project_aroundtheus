@@ -47,13 +47,6 @@ const popupConfig = {
 
 const placesList = document.querySelector(".card");
 
-function renderCard(data) {
-  const card = new Card(data, "#card-template");
-  placesList.append(card.getView());
-}
-
-initialCards.forEach(renderCard);
-
 const profileEditOpen = document.querySelector(".profile__button-edit");
 const profileModal = document.querySelector("#modal-add"); //pop
 const profileModalClose = profileModal.querySelector(".modal__button-exit");
@@ -78,8 +71,20 @@ const settings = {
   errorClass: "modal__error-visible",
 };
 
+const cardPreview = new PopupWithImage({ popupSelector: "#image-modal" });
+
 const createCard = (name, link) => {
-  const card = new Card({ name: name, link: link }, "#card-template");
+  const card = new Card(
+    {
+      name: name,
+      link: link,
+      handleImageClick: (name, link) => {
+        console.log(name, link);
+        cardPreview.open(name, link);
+      },
+    },
+    "#card-template"
+  );
   return card.getView();
 };
 
@@ -89,8 +94,6 @@ addFormValidator.enableValidation();
 addeditFormValidator.enableValidation();
 
 const editPopup = new Popup({ popupSelector: "#modal-add" });
-const cardPopup = new Popup({ popupSelector: "#modal-card-add" });
-const cardPreview = new PopupWithImage({ popupSelector: "#image-modal" });
 
 const userInfo = new UserInfo({
   nameSelector: "#name",
@@ -100,7 +103,6 @@ const userInfo = new UserInfo({
 const formPopup = new PopupWithForm({
   popupSelector: popupConfig.editFormPopupSelector,
   handleFormSubmit: (data) => {
-    console.log(test);
     const name = data.name;
     const description = data.description;
     userInfo.setUserInfo({ name: name, description: description });
@@ -117,45 +119,24 @@ const section = new Section(
   ".card"
 );
 section.renderItems(initialCards);
-/*cardModalElement.addEventListener("mousedown", (evt) => {
-  if (
-    evt.target.classList.contains("modal") ||
-    evt.target.classList.contains("modal__open")
-  ) {
-    closeModal(profileModal);
-  }
-});
 
-cardModalElement.addEventListener("mousedown", (evt) => {
-  if (
-    evt.target.classList.contains("modal") ||
-    evt.target.classList.contains("modal__open")
-  ) {
-    closeModal(cardModalElement);
-  }
-});
+function reneder(data) {
+  const card = new Card(data, "#card-template");
+  placesList.append(card.getView());
+}
 
-imageModal.addEventListener("mousedown", (evt) => {
-  if (
-    evt.target.classList.contains("modal") ||
-    evt.target.classList.contains("modal__open")
-  ) {
-    closeModal(imageModal);
-  }
-});
+editPopup.setEventListener();
 
-profileEditOpen.addEventListener("click", () => {
-  nameInput.value = profileNameTitle.textContent;
-  jobInput.value = profileJobTitle.textContent;
-  openModal(profileModal);
-});
+cardPreview.setEventListener();
+
+formPopup.setEventListener();
 
 profileModalClose.addEventListener("click", function () {
-  closeModal(profileModal);
+  editPopup.close();
 });
 
 imageCloseButton.addEventListener("click", function () {
-  closeModal(imageModal);
+  cardPreview.close();
 });
 
 profileEditForm.addEventListener("submit", function (event) {
@@ -164,25 +145,21 @@ profileEditForm.addEventListener("submit", function (event) {
   const descriptionValue = event.target.description.value;
   profileNameTitle.textContent = nameValue;
   profileJobTitle.textContent = descriptionValue;
-  closeModal(profileModal);
-});
-
-cardAddButton.addEventListener("click", () => {
-  openModal(cardModalElement);
+  editPopup.close();
 });
 
 cardAddClose.addEventListener("click", function () {
-  closeModal(cardModalElement);
-});*/
+  formPopup.close();
+});
 
 const openProfileEdit = () => {
   profileNameTitle.value = userInfo.getUserInfo().name;
   profileJobTitle.value = userInfo.getUserInfo().descrtiption;
-  profileModal.open;
+  editPopup.open();
 };
 
 profileEditOpen.addEventListener("click", openProfileEdit);
 
-cardAddButton.addEventListener("click", () => {
-  cardAddForm.open;
-});
+//cardAddButton.addEventListener("click", () => {
+  //openModal(cardModalElement);
+//});
