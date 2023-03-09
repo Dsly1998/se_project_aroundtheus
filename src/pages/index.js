@@ -110,8 +110,9 @@ const editFormPopup = new PopupWithForm({
 const addCardPopup = new PopupWithForm({
   popupSelector: popupConfig.addCardPopupSelector,
   handleFormSubmit: function (data) {
-    section.addItem(createCard(data.name, data.link));
     addCardPopup.close();
+    addFormValidator.resetValidation();
+    section.addItem(createCard(data.name, data.link));
   },
 });
 
