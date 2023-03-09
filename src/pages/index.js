@@ -127,11 +127,6 @@ const section = new Section(
 );
 section.renderItems(initialCards);
 
-function reneder(data) {
-  const card = new Card(data, "#card-template");
-  placesList.append(card.getView());
-}
-
 editFormPopup.setEventListener();
 
 cardPreview.setEventListener();
@@ -155,8 +150,9 @@ cardAddClose.addEventListener("click", function () {
 });
 
 const openProfileEdit = () => {
-  profileName.value = userInfo.getUserInfo().name;
-  profileDescription.value = userInfo.getUserInfo().description;
+  const { name, description } = userInfo.getUserInfo();
+  profileName.value = name;
+  profileDescription.value = description;
   addeditFormValidator.resetValidation();
   editFormPopup.open();
 };

@@ -14,7 +14,7 @@
   transition: visibility 0s linear 0.3s, opacity 0.3s linear;
 }
 
-.modal__open {
+.modal_open {
   background-color: rgba(0, 0, 0, 0.7);
   visibility: visible;
   pointer-events: all;
@@ -93,7 +93,6 @@
 
 .modal__input_type_error {
   width: 358px;
-  font-family: "Inter";
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
@@ -127,7 +126,6 @@
 }
 
 .modal__button_disabled {
-  box-sizing: border-box;
   width: 358px;
   height: 50.15px;
   opacity: 0.2;
@@ -136,7 +134,7 @@
   background: #e5e5e5;
   color: rgba(0, 0, 0, 1);
 }
-.modal__button:hover {
+.modal__button:hover:not(:disabled) {
   opacity: 0.7;
   transition: 0.5s;
   cursor: pointer;

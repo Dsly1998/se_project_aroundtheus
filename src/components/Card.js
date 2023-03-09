@@ -5,7 +5,6 @@ class Card {
     this._alt = data.name;
     this._handleImageClick = data.handleImageClick;
     this._cardSelector = cardSelector;
-    this._imageModal = document.querySelector("#image-modal");
   }
 
   _setEventListeners() {
