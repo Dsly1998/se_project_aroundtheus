@@ -18,21 +18,17 @@ export default class FormValidator {
     errorMessageElement.classList.add(this._errorClass);
   }
 
+  _checkFormValidity = () =>
+    this._inputElements.every((input) => input.validity.valid);
+
   _toggleButtonState() {
-    let foundInvalid = false;
+    const isFormValid = this._checkFormValidity();
 
-    this._inputElements.forEach((inputEl) => {
-      if (!inputEl.validity.valid) {
-        foundInvalid = true;
-      }
-    });
-
-    if (foundInvalid) {
-      this._submitButton.classList.add(this._inactiveButtonClass);
-      return (this._submitButton.disabled = true);
+    if (isFormValid) {
+      this._submitButton.disabled = false;
+    } else {
+      this._submitButton.disabled = true;
     }
-    this._submitButton.classList.remove(this._inactiveButtonClass);
-    this._submitButton.disabled = false;
   }
 
   _hideInputError(inputElements) {

@@ -153,7 +153,6 @@ const openProfileEdit = () => {
   const { name, description } = userInfo.getUserInfo();
   profileName.value = name;
   profileDescription.value = description;
-  addeditFormValidator.resetValidation();
   editFormPopup.open();
 };
 
