@@ -18,21 +18,21 @@ export default class FormValidator {
     errorMessageElement.classList.add(this._errorClass);
   }
 
-  _toggleButtonState(inputElements, submitButton) {
+  _toggleButtonState() {
     let foundInvalid = false;
 
-    inputElements.forEach((inputEl) => {
+    this._inputElements.forEach((inputEl) => {
       if (!inputEl.validity.valid) {
         foundInvalid = true;
       }
     });
 
     if (foundInvalid) {
-      submitButton.classList.add(this._inactiveButtonClass);
-      return (submitButton.disabled = true);
+      this._submitButton.classList.add(this._inactiveButtonClass);
+      return (this._submitButton.disabled = true);
     }
-    submitButton.classList.remove(this._inactiveButtonClass);
-    submitButton.disabled = false;
+    this._submitButton.classList.remove(this._inactiveButtonClass);
+    this._submitButton.disabled = false;
   }
 
   _hideInputError(inputElements) {
@@ -52,21 +52,21 @@ export default class FormValidator {
   }
 
   _setEventListeners() {
-    const inputElements = [...this._form.querySelectorAll(this._inputSelector)];
-    const submitButton = this._form.querySelector(this._submitButtonSelector);
-    submitButton.disabled = true;
-    this._toggleButtonState(inputElements, submitButton);
-    this._form.addEventListener("reset", () => {
-      setTimeout(() => {
-        this._toggleButtonState(inputElements, submitButton);
-      }, 0);
-    });
-    inputElements.forEach((inputEl) => {
+    this._inputElements = [...this._form.querySelectorAll(this._inputSelector)];
+    this._submitButton = this._form.querySelector(this._submitButtonSelector);
+    this._submitButton.disabled = true;
+    this._toggleButtonState();
+
+    this._inputElements.forEach((inputEl) => {
       inputEl.addEventListener("input", (e) => {
         this._checkInputValidity(inputEl);
-        this._toggleButtonState(inputElements, submitButton);
+        this._toggleButtonState();
       });
     });
+  }
+
+  resetValidation() {
+    this._toggleButtonState();
   }
 
   enableValidation() {

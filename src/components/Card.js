@@ -1,5 +1,3 @@
-import { openModal } from "../components/utils.js";
-
 class Card {
   constructor(data, cardSelector) {
     this._name = data.name;
