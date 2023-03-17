@@ -6,48 +6,21 @@ import PopupWithForm from "../components/PopupWithForm";
 import PopupWithImage from "../components/PopupWithImage";
 import UserInfo from "../components/UserInfo";
 import Section from "../components/Section";
+import Api from "../components/api";
 
-const initialCards = [
-  {
-    name: "Yosemite Valley",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
-    alt: "Yosemite Valley",
+export const api = new Api({
+  baseUrl: "https://around.nomoreparties.co/v1/group-12",
+  headers: {
+    authorization: "7279c0be-4bdd-49b0-9b2c-1082aa2638f0",
+    "Content-Type": "application/json",
   },
-  {
-    name: "Lake Louise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lake-louise.jpg",
-    alt: "Lake Louise",
-  },
-  {
-    name: "Bald Mountains",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/bald-mountains.jpg",
-    alt: "Bald Mountains",
-  },
-  {
-    name: "Latemar",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/latemar.jpg",
-    alt: "Latemar",
-  },
-  {
-    name: "Vanoise National Park",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/vanoise.jpg",
-    alt: "Vanoise National Park",
-  },
-  {
-    name: "Lago di Braies",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
-    alt: "Lago di Braies",
-  },
-];
+});
 
 ///////////queryselectors///////
-const placesList = document.querySelector(".card");
 const profileEditOpen = document.querySelector(".profile__button-edit");
 const profileModal = document.querySelector("#modal-add"); //pop
 const profileModalClose = profileModal.querySelector(".modal__button-exit");
 const profileEditForm = document.querySelector("#modal-edit-form"); //section
-const profileNameTitle = document.querySelector(".profile__title");
-const profileJobTitle = document.querySelector(".profile__title-description");
 const imageModal = document.querySelector("#image-modal"); //img
 const cardAddButton = document.querySelector(".profile__button");
 const cardModalElement = document.querySelector("#modal-card-add"); //form
@@ -97,13 +70,28 @@ const userInfo = new UserInfo({
   titleSelector: ".profile__title-description",
 });
 
+api.getUserInfo().then((userData) => {
+  api.setUserInfo({
+    userName: userData.name,
+    userDescription: userData.about,
+  });
+});
+
 const editFormPopup = new PopupWithForm({
   popupSelector: popupConfig.editFormPopupSelector,
-  handleFormSubmit: (data) => {
-    const name = data.name;
-    const description = data.description;
-    userInfo.setUserInfo({ name: name, description: description });
-    editFormPopup.close();
+  handleFormSubmit: (inputValues) => {
+    api
+      .setUserInfo(inputValues)
+      .then((data) => {
+        userInfo.setUserInfo(data);
+        editPopupForm.close();
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        editPopupForm.finishLoading();
+      });
   },
 });
 
@@ -125,7 +113,15 @@ const section = new Section(
   },
   ".card"
 );
-section.renderItems(initialCards);
+
+api.getInitialCards().then((cards) => section.renderItems(cards));
+
+api.getUserInfo().then((userData) => {
+  userInfo.setUserInfo({
+    userName: userData.name,
+    userDescription: userData.about,
+  });
+});
 
 editFormPopup.setEventListener();
 
@@ -150,9 +146,9 @@ cardAddClose.addEventListener("click", function () {
 });
 
 const openProfileEdit = () => {
-  const { name, description } = userInfo.getUserInfo();
+  const { name: name, about: about } = api.getUserInfo();
   profileName.value = name;
-  profileDescription.value = description;
+  profileDescription.value = about;
   editFormPopup.open();
 };
 
