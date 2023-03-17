@@ -68,30 +68,26 @@ addeditFormValidator.enableValidation();
 const userInfo = new UserInfo({
   nameSelector: ".profile__title",
   titleSelector: ".profile__title-description",
+  avatar: ".profile__image",
 });
 
 api.getUserInfo().then((userData) => {
-  api.setUserInfo({
-    userName: userData.name,
-    userDescription: userData.about,
+  userInfo.setUserInfo({
+    about: userData.name,
+    name: userData.about,
+    avatar: userData.avatar,
   });
 });
 
 const editFormPopup = new PopupWithForm({
   popupSelector: popupConfig.editFormPopupSelector,
-  handleFormSubmit: (inputValues) => {
-    api
-      .setUserInfo(inputValues)
-      .then((data) => {
-        userInfo.setUserInfo(data);
-        editPopupForm.close();
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => {
-        editPopupForm.finishLoading();
-      });
+  handleFormSubmit: (data) => {
+    userInfo.setUserInfo({
+      name: data.name,
+      about: data.about,
+      avatar: data.avatar,
+    });
+    editFormPopup.close();
   },
 });
 
@@ -118,11 +114,11 @@ api.getInitialCards().then((cards) => section.renderItems(cards));
 
 api.getUserInfo().then((userData) => {
   userInfo.setUserInfo({
-    userName: userData.name,
-    userDescription: userData.about,
+    name: userData.name,
+    about: userData.about,
+    avatar: userData.avatar,
   });
 });
-
 editFormPopup.setEventListener();
 
 cardPreview.setEventListener();
@@ -146,7 +142,7 @@ cardAddClose.addEventListener("click", function () {
 });
 
 const openProfileEdit = () => {
-  const { name: name, about: about } = api.getUserInfo();
+  const { name: name, about: about } = userInfo.getUserInfo();
   profileName.value = name;
   profileDescription.value = about;
   editFormPopup.open();

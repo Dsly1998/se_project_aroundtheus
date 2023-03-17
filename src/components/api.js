@@ -23,17 +23,6 @@ export default class Api {
     });
   }
 
-  setUserInfo({ name, about }) {
-    return this._sendRequest(`${this._baseUrl}/users/me`, {
-      method: "PATCH",
-      headers: this._headers,
-      body: JSON.stringify({
-        name: name,
-        about: about,
-      }),
-    });
-  }
-
   getInitialCards() {
     return this._sendRequest(`${this._baseUrl}/cards`, {
       headers: this._headers,
