@@ -28,7 +28,7 @@ const cardAddClose = cardModalElement.querySelector(".modal__button-exit");
 const cardAddForm = document.querySelector("#modal-card-form"); //section
 const imageCloseButton = imageModal.querySelector(".modal__button-exit");
 const profileName = document.querySelector("#name");
-const profileDescription = document.querySelector("#description");
+const profileDescription = document.querySelector("#about");
 
 const settings = {
   formSelector: ".modal__form",
@@ -54,6 +54,12 @@ const createCard = (name, link) => {
       handleImageClick: (name, link) => {
         cardPreview.open(name, link);
       },
+      handleDeleteCard: () => {
+        const Id = card.getId()
+        api.removeCard(Id).then((res) => {
+          card.handleDeleteButton();
+        });
+      },
     },
     "#card-template"
   );
@@ -71,21 +77,12 @@ const userInfo = new UserInfo({
   avatar: ".profile__image",
 });
 
-api.getUserInfo().then((userData) => {
-  userInfo.setUserInfo({
-    about: userData.name,
-    name: userData.about,
-    avatar: userData.avatar,
-  });
-});
-
 const editFormPopup = new PopupWithForm({
   popupSelector: popupConfig.editFormPopupSelector,
   handleFormSubmit: (data) => {
     userInfo.setUserInfo({
       name: data.name,
       about: data.about,
-      avatar: data.avatar,
     });
     editFormPopup.close();
   },
@@ -94,9 +91,11 @@ const editFormPopup = new PopupWithForm({
 const addCardPopup = new PopupWithForm({
   popupSelector: popupConfig.addCardPopupSelector,
   handleFormSubmit: function (data) {
-    addCardPopup.close();
-    addFormValidator.resetValidation();
-    section.addItem(createCard(data.name, data.link));
+    api.saveAddCard(data).then((data) => {
+      addCardPopup.close();
+      addFormValidator.resetValidation();
+      section.addItem(createCard(data.name, data.link));
+    });
   },
 });
 

@@ -3,8 +3,14 @@ class Card {
     this._name = data.name;
     this._link = data.link;
     this._alt = data.name;
+    this._id = data.id;
     this._handleImageClick = data.handleImageClick;
+    this._handleDeleteCard = data.handleDeleteCard;
     this._cardSelector = cardSelector;
+  }
+
+  getId(){
+    return this.id;
   }
 
   _setEventListeners() {
@@ -14,7 +20,9 @@ class Card {
 
     this.element
       .querySelector(".card__delete-button")
-      .addEventListener("click", () => this._handleDeleteButton());
+      .addEventListener("click", () =>
+        this._handleDeleteCard(this._name, this._link)
+      );
 
     this.element
       .querySelector(".card__image")
@@ -29,7 +37,7 @@ class Card {
       .classList.toggle("card__like-image_active");
   }
 
-  _handleDeleteButton() {
+  handleDeleteButton() {
     this.element.remove();
   }
 

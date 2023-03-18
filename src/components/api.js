@@ -23,24 +23,36 @@ export default class Api {
     });
   }
 
+  saveUserInfo({ name, about }) {
+    return this._sendRequest(`${this._baseUrl}/users/me`, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({
+        name: name,
+        about: about,
+      }),
+    });
+  }
+
   getInitialCards() {
     return this._sendRequest(`${this._baseUrl}/cards`, {
       headers: this._headers,
     });
   }
 
-  addNewCard(data) {
+  saveAddCard({ name, link }) {
     return this._sendRequest(`${this._baseUrl}/cards`, {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({
-        name: data.title,
-        link: data.imageLink,
+        name,
+        link,
       }),
     });
+    
   }
 
-  deleteCard(cardId) {
+  removeCard(cardId) {
     return this._sendRequest(`${this._baseUrl}/cards/${cardId}`, {
       method: "DELETE",
       headers: this._headers,
