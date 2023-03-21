@@ -60,6 +60,21 @@
   display: block;
 }
 
+.modal__container-delete {
+  position: fixed;
+  width: 430px;
+  height: 181px;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  top: 270px;
+  background: #ffffff;
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  display: block;
+}
+
 .modal__title {
   width: 330px;
   font-family: "Inter";
@@ -123,6 +138,23 @@
   border-color: rgba(0, 0, 0, 1);
   margin: auto;
   margin-top: 48px;
+}
+
+.modal__button-delete {
+  width: 358px;
+  height: 50px;
+  background: #000000;
+  border-radius: 2px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+  color: #ffffff;
+  border-color: rgba(0, 0, 0, 1);
+  margin: auto;
+  margin-top:34px;
 }
 
 .modal__button_disabled {

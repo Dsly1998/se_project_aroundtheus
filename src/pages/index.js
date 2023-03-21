@@ -19,6 +19,7 @@ export const api = new Api({
 ///////////queryselectors///////
 const profileEditOpen = document.querySelector(".profile__button-edit");
 const profileModal = document.querySelector("#modal-add"); //pop
+const deleteModal = document.querySelector("#modal-delete");
 const profileModalClose = profileModal.querySelector(".modal__button-exit");
 const profileEditForm = document.querySelector("#modal-edit-form"); //section
 const imageModal = document.querySelector("#image-modal"); //img
@@ -42,23 +43,28 @@ const settings = {
 const popupConfig = {
   editFormPopupSelector: "#modal-add",
   addCardPopupSelector: "#modal-card-add",
+  deleteCardPopupSelector: "#modal-delete",
 };
 
 const cardPreview = new PopupWithImage({ popupSelector: "#image-modal" });
 
-const createCard = (name, link) => {
+const createCard = (cardData) => {
   const card = new Card(
     {
-      name: name,
-      link: link,
+      cardData,
       handleImageClick: (name, link) => {
         cardPreview.open(name, link);
       },
       handleDeleteCard: () => {
-        const Id = card.getId()
-        api.removeCard(Id).then((res) => {
+        api.removeCard(card.getId()).then((res) => {
           card.handleDeleteButton();
         });
+      },
+      handleLikeButton: () => {
+        api
+          .addLike(card.getId())
+          .then((card) => console.log(card.likes.length)); // 2 -> send this data inside the card and render this value under the heart icon
+        card.handleLikeButton();
       },
     },
     "#card-template"
@@ -77,9 +83,21 @@ const userInfo = new UserInfo({
   avatar: ".profile__image",
 });
 
+const deleteCardPopup = new PopupWithForm({
+  popupSelector: popupConfig.deleteCardPopupSelector,
+  handleFormSubmit: (data) => {
+    console.log(open);
+    deleteCardPopup.close();
+  },
+});
+
 const editFormPopup = new PopupWithForm({
   popupSelector: popupConfig.editFormPopupSelector,
   handleFormSubmit: (data) => {
+    api.saveUserInfo({
+      name: data.name,
+      about: data.about,
+    });
     userInfo.setUserInfo({
       name: data.name,
       about: data.about,
@@ -94,7 +112,7 @@ const addCardPopup = new PopupWithForm({
     api.saveAddCard(data).then((data) => {
       addCardPopup.close();
       addFormValidator.resetValidation();
-      section.addItem(createCard(data.name, data.link));
+      section.addItem(createCard(data));
     });
   },
 });
@@ -102,7 +120,7 @@ const addCardPopup = new PopupWithForm({
 const section = new Section(
   {
     renderer: (data) => {
-      const card = createCard(data.name, data.link);
+      const card = createCard(data);
       section.addItem(card);
     },
   },
@@ -123,6 +141,8 @@ editFormPopup.setEventListener();
 cardPreview.setEventListener();
 
 addCardPopup.setEventListener();
+
+deleteCardPopup.setEventListener();
 
 profileModalClose.addEventListener("click", function () {
   editFormPopup.close();

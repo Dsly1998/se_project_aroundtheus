@@ -108,6 +108,25 @@
         <h3 class="modal__image-description"></h3>
       </div>
     </section>
+    <section class="modal" id="modal-delete">
+      <div class="modal__container-delete">
+        <button class="modal__button-exit" type="button">
+          <img
+            src="<%=require('./images/Vector_plus.svg')%>"
+            alt="plus"
+            class="modal__close-button-image"
+          />
+        </button>
+        <h1 class="modal__title">Are you Sure?</h1>
+        <form class="modal__form" id="modal-edit-form">
+            <span class="modal__error-visible" id="about-error"></span>
+          </fieldset>
+          <fieldset class="modal__fieldset">
+            <button class="modal__button-delete" id="delete-card" type="submit">Yes</button>
+          </fieldset>
+        </form>
+      </div>
+    </section>
     <header class="header">
       <img
         src="<%=require('./images/Vector_logo.svg')%>"
