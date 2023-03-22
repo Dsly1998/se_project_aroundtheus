@@ -66,15 +66,16 @@
 }
 
 .card__like-image {
-  position: relative;
-  bottom: 17px;
+  position: absolute;
+  bottom: 28.3px;
+  right: 17.5px;
   width: 21px;
-  height: 17px;
+  height: 19px;
   display: none;
 }
 
 .card__like-image_active {
-  display: inline-block;
+  display: block;
 }
 
 .card__delete-button {
@@ -93,6 +94,11 @@
   opacity: 0.5;
   cursor: pointer;
   transition: 0.5s;
+}
+
+.card__like-count {
+  margin: 0;
+  padding-top: 2px;
 }
 
 @media screen and (min-width: 320px) and (max-width: 767px) {

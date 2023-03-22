@@ -7,6 +7,7 @@ import PopupWithImage from "../components/PopupWithImage";
 import UserInfo from "../components/UserInfo";
 import Section from "../components/Section";
 import Api from "../components/api";
+import RemoveCard from "../components/Removecard";
 
 export const api = new Api({
   baseUrl: "https://around.nomoreparties.co/v1/group-12",
@@ -48,6 +49,8 @@ const popupConfig = {
 
 const cardPreview = new PopupWithImage({ popupSelector: "#image-modal" });
 
+const cardRemove = new RemoveCard({ popupSelector: "#modal-delete" });
+
 const createCard = (cardData) => {
   const card = new Card(
     {
@@ -56,15 +59,27 @@ const createCard = (cardData) => {
         cardPreview.open(name, link);
       },
       handleDeleteCard: () => {
-        api.removeCard(card.getId()).then((res) => {
-          card.handleDeleteButton();
+        cardRemove.open();
+        cardRemove.setSubmitAction(() => {
+          api.removeCard(card.getId()).then((res) => {
+            card.handleDeleteButton();
+          });
         });
       },
       handleLikeButton: () => {
-        api
-          .addLike(card.getId())
-          .then((card) => console.log(card.likes.length)); // 2 -> send this data inside the card and render this value under the heart icon
-        card.handleLikeButton();
+        console.log(card.element);
+        if (card.isLiked())
+          api.removeLike(card.getId()).then((res) => {
+            console.log(res);
+            card.setLikesInfo(res.likes.length);
+            card.handleLikeButton();
+          });
+        else
+          api.addLike(card.getId()).then((res) => {
+            console.log(res);
+            card.setLikesInfo(res.likes.length);
+            card.handleLikeButton();
+          });
       },
     },
     "#card-template"
@@ -83,13 +98,15 @@ const userInfo = new UserInfo({
   avatar: ".profile__image",
 });
 
-const deleteCardPopup = new PopupWithForm({
-  popupSelector: popupConfig.deleteCardPopupSelector,
-  handleFormSubmit: (data) => {
-    console.log(open);
-    deleteCardPopup.close();
-  },
-});
+// const deleteCardPopup = new PopupWithForm({
+//   popupSelector: popupConfig.deleteCardPopupSelector,
+//   handleFormSubmit: () => {
+//     api.removeCard(card.getId()).then((res) => {
+//       card.handleDeleteButton();
+//     });
+//     deleteCardPopup.close();
+//   },
+// });
 
 const editFormPopup = new PopupWithForm({
   popupSelector: popupConfig.editFormPopupSelector,
@@ -142,7 +159,6 @@ cardPreview.setEventListener();
 
 addCardPopup.setEventListener();
 
-deleteCardPopup.setEventListener();
 
 profileModalClose.addEventListener("click", function () {
   editFormPopup.close();
