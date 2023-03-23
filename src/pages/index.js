@@ -122,6 +122,7 @@ const userInfo = new UserInfo({
 const editFormPopup = new PopupWithForm({
   popupSelector: popupConfig.editFormPopupSelector,
   handleFormSubmit: (data) => {
+    editFormPopup.setLoading(true);
     api.saveUserInfo({
       name: data.name,
       about: data.about,
@@ -132,6 +133,7 @@ const editFormPopup = new PopupWithForm({
       avatar: data.avatar,
     });
     editFormPopup.close();
+    editFormPopup.setloading(false, "Save");
   },
 });
 
@@ -140,11 +142,17 @@ const editFormPopup = new PopupWithForm({
 const avatarPopup = new PopupWithForm({
   popupSelector: popupConfig.avatarPopupSelector,
   handleFormSubmit: (data) => {
-    api.updateProfileImage(data).then((data) => {
-      profileImage.src = data.avatar;
-      avatarPopup.close();
-      addFormValidator.resetValidation();
-    });
+    avatarPopup.setLoading(true);
+    api
+      .updateProfileImage(data)
+      .then((data) => {
+        profileImage.src = data.avatar;
+        avatarPopup.close();
+        addFormValidator.resetValidation();
+      })
+      .finally(() => {
+        avatarPopup.setLoading(false, "Save");
+      });
   },
 });
 
@@ -152,11 +160,17 @@ const avatarPopup = new PopupWithForm({
 const addCardPopup = new PopupWithForm({
   popupSelector: popupConfig.addCardPopupSelector,
   handleFormSubmit: function (data) {
-    api.saveAddCard(data).then((data) => {
-      addCardPopup.close();
-      addFormValidator.resetValidation();
-      section.addItem(createCard(data));
-    });
+    addCardPopup.setLoading(true);
+    api
+      .saveAddCard(data)
+      .then((data) => {
+        addCardPopup.close();
+        addFormValidator.resetValidation();
+        section.addItem(createCard(data));
+      })
+      .finally(() => {
+        addCardPopup.setloading(false, "Create");
+      });
   },
 });
 

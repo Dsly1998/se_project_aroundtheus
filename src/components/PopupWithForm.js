@@ -25,7 +25,8 @@ export default class PopupWithForm extends Popup {
   }
 
   setLoading(isLoading, buttonText) {
-    const button = this._element.querySelector(".modal__button");
+    const button = this._popupForm.querySelector(".modal__button");
+    console.log(button);
     if (isLoading) {
       button.textContent = "Saving...";
     } else {
@@ -33,10 +34,8 @@ export default class PopupWithForm extends Popup {
     }
   }
 
-
   close() {
     this._popupForm.reset();
     super.close();
   }
 }
-
