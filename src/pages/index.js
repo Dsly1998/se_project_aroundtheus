@@ -126,6 +126,7 @@ const editFormPopup = new PopupWithForm({
     api.saveUserInfo({
       name: data.name,
       about: data.about,
+      avatar: data.avatar,
     });
     userInfo.setUserInfo({
       name: data.name,
