@@ -6,6 +6,7 @@
   margin: auto;
   padding-top: 40px;
   width: 100%;
+  position: relative;
 }
 
 .profile__title {
@@ -52,6 +53,31 @@
   width: 127px;
   height: 127px;
   border-radius: 50%;
+}
+
+.profile__image-container:hover {
+  opacity: 70%;
+  cursor: pointer;
+}
+
+.profile__image-container:hover .profile__image-button {
+  display: block;
+}
+
+.profile__image-button {
+  position: absolute;
+  left: 50px;
+  top: 92px;
+  background: transparent url(../images/Vector_pen.svg) center no-repeat;
+  background-size: cover;
+  border: 0px;
+  width: 26px;
+  height: 26px;
+  padding: 0px;
+  margin: 0px;
+  cursor: pointer;
+  transition: 0.75s;
+  display: none;
 }
 
 .profile__button {
@@ -110,6 +136,11 @@
     margin: 0 auto 0;
   }
 
+  .profile__image-overlay {
+    left: 75px;
+    top: 35px;
+  }
+
   .profile__title {
     max-width: 100%;
     font-size: 22px;
@@ -138,6 +169,10 @@
     height: 18px;
     justify-content: center;
     margin-top: 30px;
+  }
+
+  .profile__image-button {
+    left: 127px;
   }
 
   .profile__button-image {

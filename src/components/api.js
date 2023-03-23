@@ -49,7 +49,6 @@ export default class Api {
         link,
       }),
     });
-    
   }
 
   removeCard(cardId) {
@@ -73,12 +72,12 @@ export default class Api {
     });
   }
 
-  updateProfileImage(avatarUrl) {
+  updateProfileImage({ link }) {
     return this._sendRequest(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
-        avatar: avatarUrl,
+        avatar: link,
       }),
     });
   }

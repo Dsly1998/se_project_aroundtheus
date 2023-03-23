@@ -95,6 +95,37 @@
         </form>
       </div>
     </section>
+
+    <section class="modal " id="modal-avatar-add">
+      <div class="modal__container modal__container-avatar">
+        <button class="modal__button-exit id=card-modal-exit" type="button">
+          <img
+            src="<%=require('./images/Vector_plus.svg')%>"
+            alt="plus"
+            class="modal__close-button-image"
+          />
+        </button>
+        <h1 class="modal__title">Change profile picture</h1>
+        <form class="modal__form" id="modal-avatar-form">
+            <span class="modal__error-visible" id="place-error"></span>
+            <label class="modal__label-description"></label>
+            <input
+              class="modal__input modal__input-avatar"
+              type="url"
+              id="link"
+              name="link"
+              placeholder="Image link"
+              required
+            />
+            <span class="modal__error-visible" id="link-error"></span>
+          </fieldset>
+          <fieldset class="modal__fieldset">
+            <button class="modal__button modal__button-avatar" type="submit">save</button>
+          </fieldset>
+        </form>
+      </div>
+    </section>
+
     <section class="modal" id="image-modal">
       <div class="modal__image-container">
         <button class="modal__button-exit" type="button">
@@ -136,11 +167,13 @@
     </header>
     <main class="page">
       <section class="profile">
-        <img
-          src="<%=require('./images/jacques-cousteau.png')%>"
-          alt="photo of jacques-cousteau"
-          class="profile__image"
-        />
+        <div class="profile__image-container">
+          <img 
+          class="profile__image" 
+          src="" 
+          alt="avatar" />
+          <button class="profile__image-button"></button>
+        </div>
         <div class="profile__title-bar">
           <h1 class="profile__title">Jacques Cousteau</h1>
           <button class="profile__button-edit" type="button">

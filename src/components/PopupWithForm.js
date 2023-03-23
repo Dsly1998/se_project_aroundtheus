@@ -24,6 +24,16 @@ export default class PopupWithForm extends Popup {
     });
   }
 
+  setLoading(isLoading, buttonText) {
+    const button = this._element.querySelector(".modal__button");
+    if (isLoading) {
+      button.textContent = "Saving...";
+    } else {
+      button.textContent = buttonText;
+    }
+  }
+
+
   close() {
     this._popupForm.reset();
     super.close();
