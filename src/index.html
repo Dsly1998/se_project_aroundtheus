@@ -96,7 +96,7 @@
       </div>
     </section>
 
-    <section class="modal " id="modal-avatar-add">
+    <section class="modal" id="modal-avatar-add">
       <div class="modal__container modal__container-avatar">
         <button class="modal__button-exit id=card-modal-exit" type="button">
           <img
@@ -107,20 +107,23 @@
         </button>
         <h1 class="modal__title">Change profile picture</h1>
         <form class="modal__form" id="modal-avatar-form">
-            <span class="modal__error-visible" id="place-error"></span>
+          <fieldset class="modal__fieldset-avatar">
+            <span class="modal__error-visible" id="avatar-errors"></span>
             <label class="modal__label-description"></label>
             <input
               class="modal__input modal__input-avatar"
               type="url"
-              id="link"
+              id="url"
               name="link"
               placeholder="Image link"
               required
             />
-            <span class="modal__error-visible" id="link-error"></span>
+            <span class="modal__error-visible" id="avatar-error"></span>
           </fieldset>
           <fieldset class="modal__fieldset">
-            <button class="modal__button modal__button-avatar" type="submit">save</button>
+            <button class="modal__button modal__button-avatar" type="submit">
+              save
+            </button>
           </fieldset>
         </form>
       </div>
@@ -149,11 +152,14 @@
           />
         </button>
         <h1 class="modal__title">Are you Sure?</h1>
-        <form class="modal__form" id="modal-edit-form">
-            <span class="modal__error-visible" id="about-error"></span>
+        <form class="modal__form" id="modal-delete-form">
+          <fieldset class="modal__fieldset">
+            <span class="modal__error-visible" id="about-error-delete"></span>
           </fieldset>
           <fieldset class="modal__fieldset">
-            <button class="modal__button-delete" id="delete-card" type="submit">Yes</button>
+            <button class="modal__button-delete" id="delete-card" type="submit">
+              Yes
+            </button>
           </fieldset>
         </form>
       </div>
@@ -168,10 +174,11 @@
     <main class="page">
       <section class="profile">
         <div class="profile__image-container">
-          <img 
-          class="profile__image" 
-          src="" 
-          alt="avatar" />
+          <img
+            class="profile__image"
+            src="<%=require('./images/Jacques-cousteau.png')%>"
+            alt="avatar"
+          />
           <button class="profile__image-button"></button>
         </div>
         <div class="profile__title-bar">

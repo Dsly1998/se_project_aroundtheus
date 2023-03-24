@@ -133,8 +133,8 @@ const editFormPopup = new PopupWithForm({
       about: data.about,
       avatar: data.avatar,
     });
-    editFormPopup.close();
-    editFormPopup.setloading(false, "Save");
+    editFormPopup.close()
+      avatarPopup.setLoading(false, "Save");
   },
 });
 
