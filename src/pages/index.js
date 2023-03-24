@@ -168,7 +168,7 @@ const addCardPopup = new PopupWithForm({
         section.addItem(createCard(data));
       })
       .finally(() => {
-        addCardPopup.setloading(false, "Create");
+        addCardPopup.setLoading(false, "Create");
       });
   },
 });
