@@ -17,6 +17,6 @@ export default class UserInfo {
     console.log(avatar);
     this._nameElement.textContent = name;
     this._descriptionElement.textContent = about;
-    this._avatar.src = avatar;
+    if (avatar) this._avatar.src = avatar;
   }
 }

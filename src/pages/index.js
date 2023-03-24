@@ -126,15 +126,13 @@ const editFormPopup = new PopupWithForm({
     api.saveUserInfo({
       name: data.name,
       about: data.about,
-      avatar: data.avatar,
     });
     userInfo.setUserInfo({
       name: data.name,
       about: data.about,
-      avatar: data.avatar,
     });
-    editFormPopup.close()
-      avatarPopup.setLoading(false, "Save");
+    editFormPopup.close();
+    editFormPopup.setLoading(false, "Save");
   },
 });
 
