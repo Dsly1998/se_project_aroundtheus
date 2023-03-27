@@ -6,7 +6,7 @@ import PopupWithImage from "../components/PopupWithImage";
 import UserInfo from "../components/UserInfo";
 import Section from "../components/Section";
 import Api from "../components/api";
-import RemoveCard from "../components/Removecard";
+import RemoveCard from "../components/RemoveCard";
 
 /////api autherization//////
 export const api = new Api({
@@ -18,20 +18,35 @@ export const api = new Api({
 });
 
 /////getting api info/////
-api.getUserInfo().then((res) => {
-  userId = res._id;
-  userInfo.setUserInfo(res);
-});
-
-api.getInitialCards().then((cards) => section.renderItems(cards));
-
-api.getUserInfo().then((userData) => {
-  userInfo.setUserInfo({
-    name: userData.name,
-    about: userData.about,
-    avatar: userData.avatar,
+api
+  .getUserInfo()
+  .then((res) => {
+    userId = res._id;
+    userInfo.setUserInfo(res);
+  })
+  .catch((error) => {
+    console.log(error);
   });
-});
+api
+  .getInitialCards()
+  .then((cards) => {
+    section.renderItems(cards);
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+api
+  .getUserInfo()
+  .then((userData) => {
+    userInfo.setUserInfo({
+      name: userData.name,
+      about: userData.about,
+      avatar: userData.avatar,
+    });
+  })
+  .catch((error) => {
+    console.log(error);
+  });
 
 ///////////queryselectors///////
 const profileEditOpen = document.querySelector(".profile__button-edit");
@@ -67,7 +82,6 @@ const cardPreview = new PopupWithImage({ popupSelector: "#image-modal" });
 
 //////////delete card modal////
 const cardRemove = new RemoveCard({ popupSelector: "#modal-delete" });
-cardRemove.setEventListener();
 
 /////////card build/////////
 const createCard = (cardData) => {
@@ -81,10 +95,15 @@ const createCard = (cardData) => {
       handleDeleteCard: () => {
         cardRemove.open();
         cardRemove.setSubmitAction(() => {
-          api.removeCard(card.getId()).then((res) => {
-            card.handleDeleteButton();
-            cardRemove.close();
-          });
+          api
+            .removeCard(card.getId())
+            .then((res) => {
+              card.removeCard();
+              cardRemove.close();
+            })
+            .catch((error) => {
+              console.log(error);
+            });
         });
       },
       handleLikeButton: () => {
@@ -121,6 +140,7 @@ const userInfo = new UserInfo({
 ///////edit popup//////
 const editFormPopup = new PopupWithForm({
   popupSelector: popupConfig.editFormPopupSelector,
+
   handleFormSubmit: (data) => {
     editFormPopup.setLoading(true);
     api.saveUserInfo({
@@ -135,7 +155,6 @@ const editFormPopup = new PopupWithForm({
     editFormPopup.setLoading(false, "Save");
   },
 });
-
 ////////avatar popup////
 
 const avatarPopup = new PopupWithForm({

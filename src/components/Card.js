@@ -38,7 +38,7 @@ class Card {
       );
   }
 
-  handleDeleteButton() {
+  removeCard() {
     this.element.remove();
   }
 
@@ -48,7 +48,6 @@ class Card {
     });
   }
 
-  setliked() {}
 
   _getTemplate() {
     return document
