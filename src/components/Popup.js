@@ -23,6 +23,7 @@ export default class Popup {
   }
 
   open() {
+    // 2. reset validation
     this._popupElement.classList.add("modal_open");
     document.addEventListener("keydown", this._handleEscUp);
   }

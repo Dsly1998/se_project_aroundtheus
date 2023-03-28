@@ -48,8 +48,8 @@ api.getData().then(([userData, cards]) => {
     about: userData.about,
     avatar: userData.avatar,
   });
-  userId = res._id;
-  userInfo.setUserInfo(res);
+  userId = userData._id;
+  userInfo.setUserInfo(userData);
   section.renderItems(cards);
 });
 
@@ -147,16 +147,23 @@ const editFormPopup = new PopupWithForm({
 
   handleFormSubmit: (data) => {
     editFormPopup.setLoading(true);
-    api.saveUserInfo({
-      name: data.name,
-      about: data.about,
-    });
-    userInfo.setUserInfo({
-      name: data.name,
-      about: data.about,
-    });
-    editFormPopup.close();
-    editFormPopup.setLoading(false, "Save");
+    api
+      .saveUserInfo({
+        name: data.name,
+        about: data.about,
+      })
+      .then(() => {
+        userInfo.setUserInfo({
+          name: data.name,
+          about: data.about,
+        });
+        editFormPopup.close();
+        editFormPopup.setLoading(false, "Save");
+      })
+      .catch((err) => {
+        console.log(err);
+        editFormPopup.setLoading(false, "Save");
+      });
   },
 });
 ////////avatar popup////
@@ -170,6 +177,9 @@ const avatarPopup = new PopupWithForm({
       .then((data) => {
         profileImage.src = data.avatar;
         avatarPopup.close();
+      })
+      .catch((err) => {
+        console.log(err);
       })
       .finally(() => {
         avatarPopup.setLoading(false, "Save");
@@ -221,14 +231,17 @@ const openProfileEdit = () => {
   const { name: name, about: about } = userInfo.getUserInfo();
   profileName.value = name;
   profileDescription.value = about;
+  addeditFormValidator.resetValidation();
   editFormPopup.open();
 };
 
 const openCardAdd = () => {
+  addFormValidator.resetValidation();
   addCardPopup.open();
 };
 
 const openAvatarPopup = () => {
+  avatarFormValidator.resetValidation();
   avatarPopup.open();
 };
 

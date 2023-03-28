@@ -27,7 +27,7 @@ class Card {
 
     this.element
       .querySelector(".card__delete-button")
-      .addEventListener("click", () =>
+      ?.addEventListener("click", () =>
         this._handleDeleteCard(this._name, this._link)
       );
 
@@ -41,6 +41,16 @@ class Card {
   removeCard() {
     this.element.remove();
   }
+
+  _renderLikes() { 
+    // update likes counter
+    // update likes button
+  } 
+
+  updateLikes(likes) { 
+    this._likes = likes; 
+    this._renderLikes();
+}
 
   isLiked() {
     return this._likes.some((like) => {
@@ -61,18 +71,14 @@ class Card {
     this.element.querySelector(".card__image").src = this._link;
     this.element.querySelector(".card__image").alt = this._alt;
     this.element.querySelector(".card__title").textContent = this._name;
+    this._renderLikes();
     this._likeCounter = this.element.querySelector(".card__like-count");
     if (this._likes.length > 0) {
       this.setLikesInfo(this._likes);
     }
 
     if (this._ownerId !== this._userId) {
-      const deleteButton = this.element.querySelector(".card__delete-button");
-      deleteButton.remove();
-    } else {
-      this.element
-        .querySelector(".card__delete-button")
-        .classList.add("card__delete-button_active");
+      this.element.querySelector(".card__delete-button").remove();
     }
     this._setEventListeners();
     return this.element;
