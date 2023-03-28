@@ -48,7 +48,6 @@ class Card {
     });
   }
 
-
   _getTemplate() {
     return document
       .querySelector(this._cardSelector)
@@ -68,9 +67,8 @@ class Card {
     }
 
     if (this._ownerId !== this._userId) {
-      this.element
-        .querySelector(".card__delete-button")
-        .classList.remove("card__delete-button_active");
+      const deleteButton = this.element.querySelector(".card__delete-button");
+      deleteButton.remove();
     } else {
       this.element
         .querySelector(".card__delete-button")

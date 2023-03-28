@@ -17,26 +17,20 @@ export const api = new Api({
   },
 });
 
+let userId = null;
+
 /////getting api info/////
 api
   .getUserInfo()
   .then((res) => {
     userId = res._id;
     userInfo.setUserInfo(res);
+    return api.getInitialCards();
   })
-  .catch((error) => {
-    console.log(error);
-  });
-api
-  .getInitialCards()
   .then((cards) => {
     section.renderItems(cards);
+    return api.getUserInfo();
   })
-  .catch((error) => {
-    console.log(error);
-  });
-api
-  .getUserInfo()
   .then((userData) => {
     userInfo.setUserInfo({
       name: userData.name,
@@ -48,6 +42,17 @@ api
     console.log(error);
   });
 
+api.getData().then(([userData, cards]) => {
+  userInfo.setUserInfo({
+    name: userData.name,
+    about: userData.about,
+    avatar: userData.avatar,
+  });
+  userId = res._id;
+  userInfo.setUserInfo(res);
+  section.renderItems(cards);
+});
+
 ///////////queryselectors///////
 const profileEditOpen = document.querySelector(".profile__button-edit");
 const profileEditForm = document.querySelector("#modal-edit-form");
@@ -58,7 +63,6 @@ const profileDescription = document.querySelector("#about");
 const avatarPopupOpen = document.querySelector(".profile__image-button");
 const avatarEditPopup = document.querySelector("#modal-avatar-form");
 const profileImage = document.querySelector(".profile__image");
-let userId;
 
 ///// data ojects///////
 const settings = {
@@ -166,7 +170,6 @@ const avatarPopup = new PopupWithForm({
       .then((data) => {
         profileImage.src = data.avatar;
         avatarPopup.close();
-        addFormValidator.resetValidation();
       })
       .finally(() => {
         avatarPopup.setLoading(false, "Save");
@@ -183,7 +186,6 @@ const addCardPopup = new PopupWithForm({
       .saveAddCard(data)
       .then((data) => {
         addCardPopup.close();
-        addFormValidator.resetValidation();
         section.addItem(createCard(data));
       })
       .finally(() => {
@@ -236,4 +238,5 @@ profileEditOpen.addEventListener("click", openProfileEdit);
 cardAddButton.addEventListener("click", openCardAdd);
 
 avatarPopupOpen.addEventListener("click", openAvatarPopup);
+
 profileImage.addEventListener("click", openAvatarPopup);
