@@ -19,33 +19,12 @@ export const api = new Api({
 
 let userId = null;
 
-/////getting api info/////
-api
-  .getUserInfo()
-  .then((res) => {
-    userId = res._id;
-    userInfo.setUserInfo(res);
-    return api.getInitialCards();
-  })
-  .then((cards) => {
-    section.renderItems(cards);
-    return api.getUserInfo();
-  })
-  .then((userData) => {
-    userInfo.setUserInfo({
-      name: userData.name,
-      about: userData.about,
-      avatar: userData.avatar,
-    });
-  })
-  .catch((error) => {
-    console.log(error);
-  });
-
 api.getData().then(([userData, cards]) => {
   userInfo.setUserInfo({
     name: userData.name,
     about: userData.about,
+  });
+  userInfo.setUserAvatar({
     avatar: userData.avatar,
   });
   userId = userData._id;
@@ -134,6 +113,7 @@ const createCard = (cardData) => {
               console.log("Error adding like:", error);
             });
         }
+        updatlikes(likes);
       },
     },
     "#card-template"
@@ -191,7 +171,7 @@ const avatarPopup = new PopupWithForm({
     api
       .updateProfileImage(data)
       .then((data) => {
-        profileImage.src = data.avatar;
+        userInfo.setUserAvatar(data);
         avatarPopup.close();
       })
       .catch((err) => {
