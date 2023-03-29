@@ -1,6 +1,10 @@
 import Popup from "./popup";
 
 export default class RemoveCard extends Popup {
+  constructor({ popupSelector }) {
+    super({ popupSelector });
+    this._popupForm = this._popupElement.querySelector(".modal__form");
+  }
   setSubmitAction(callBack) {
     this._handleFormSubmit = callBack;
   }
@@ -13,5 +17,15 @@ export default class RemoveCard extends Popup {
         e.preventDefault();
         this._handleFormSubmit();
       });
+  }
+
+  setLoading(isLoading, buttonText) {
+    const button = this._popupForm.querySelector(".modal__button");
+    console.log(button);
+    if (isLoading) {
+      button.textContent = "Deleting...";
+    } else {
+      button.textContent = buttonText;
+    }
   }
 }

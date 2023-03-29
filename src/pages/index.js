@@ -99,6 +99,7 @@ const createCard = (cardData) => {
       handleDeleteCard: () => {
         cardRemove.open();
         cardRemove.setSubmitAction(() => {
+          cardRemove.setLoading(true);
           api
             .removeCard(card.getId())
             .then((res) => {
@@ -107,18 +108,32 @@ const createCard = (cardData) => {
             })
             .catch((error) => {
               console.log(error);
+            })
+            .finally(() => {
+              cardRemove.setLoading(false, "yes");
             });
         });
       },
       handleLikeButton: () => {
-        if (card.isLiked())
-          api.removeLike(card.getId()).then((res) => {
-            card.setLikesInfo(res.likes);
-          });
-        else
-          api.addLike(card.getId()).then((res) => {
-            card.setLikesInfo(res.likes);
-          });
+        if (card.isLiked()) {
+          api
+            .removeLike(card.getId())
+            .then((res) => {
+              card.setLikesInfo(res.likes);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        } else {
+          api
+            .addLike(card.getId())
+            .then((res) => {
+              card.setLikesInfo(res.likes);
+            })
+            .catch((error) => {
+              console.log("Error adding like:", error);
+            });
+        }
       },
     },
     "#card-template"
@@ -128,10 +143,10 @@ const createCard = (cardData) => {
 
 ///////form Validator///////
 const addFormValidator = new FormValidator(settings, cardAddForm);
-const addeditFormValidator = new FormValidator(settings, profileEditForm);
+const addEditFormValidator = new FormValidator(settings, profileEditForm);
 const avatarFormValidator = new FormValidator(settings, avatarEditPopup);
 addFormValidator.enableValidation();
-addeditFormValidator.enableValidation();
+addEditFormValidator.enableValidation();
 avatarFormValidator.enableValidation();
 
 ///////User Info//////////
@@ -158,10 +173,11 @@ const editFormPopup = new PopupWithForm({
           about: data.about,
         });
         editFormPopup.close();
-        editFormPopup.setLoading(false, "Save");
       })
       .catch((err) => {
         console.log(err);
+      })
+      .finally(() => {
         editFormPopup.setLoading(false, "Save");
       });
   },
@@ -198,6 +214,9 @@ const addCardPopup = new PopupWithForm({
         addCardPopup.close();
         section.addItem(createCard(data));
       })
+      .catch((error) => {
+        console.log(error);
+      })
       .finally(() => {
         addCardPopup.setLoading(false, "Create");
       });
@@ -231,7 +250,7 @@ const openProfileEdit = () => {
   const { name: name, about: about } = userInfo.getUserInfo();
   profileName.value = name;
   profileDescription.value = about;
-  addeditFormValidator.resetValidation();
+  addEditFormValidator.resetValidation();
   editFormPopup.open();
 };
 
