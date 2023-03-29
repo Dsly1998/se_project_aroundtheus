@@ -73,7 +73,7 @@ class Card {
 
   _renderLikes() {
     if (this._likes.length > 0) {
-      this._likeCounter.textContent = this._likes.length;
+      this._likeCounter.textContent = this._likes.length || "";
     }
     if (this.isLiked()) {
       this.element

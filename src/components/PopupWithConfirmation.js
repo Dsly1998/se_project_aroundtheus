@@ -1,6 +1,6 @@
 import Popup from "./popup";
 
-export default class RemoveCard extends Popup {
+export default class PopupWithConfirmation extends Popup {
   constructor({ popupSelector }) {
     super({ popupSelector });
     this._popupForm = this._popupElement.querySelector(".modal__form");
@@ -20,8 +20,7 @@ export default class RemoveCard extends Popup {
   }
 
   setLoading(isLoading, buttonText) {
-    const button = this._popupForm.querySelector(".modal__button");
-    console.log(button);
+    const button = this._popupForm.querySelector(".modal__button");;
     if (isLoading) {
       button.textContent = "Deleting...";
     } else {

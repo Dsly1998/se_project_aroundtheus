@@ -6,7 +6,7 @@ import PopupWithImage from "../components/PopupWithImage";
 import UserInfo from "../components/UserInfo";
 import Section from "../components/Section";
 import Api from "../components/api";
-import RemoveCard from "../components/RemoveCard";
+import PopupWithConfirmation from "../components/PopupWithConfirmation";
 
 /////api autherization//////
 export const api = new Api({
@@ -19,18 +19,22 @@ export const api = new Api({
 
 let userId = null;
 
-api.getData().then(([userData, cards]) => {
-  userInfo.setUserInfo({
-    name: userData.name,
-    about: userData.about,
+api
+  .getData()
+  .then(([userData, cards]) => {
+    userInfo.setUserInfo({
+      name: userData.name,
+      about: userData.about,
+    });
+    userInfo.setUserAvatar({
+      avatar: userData.avatar,
+    });
+    userId = userData._id;
+    section.renderItems(cards);
+  })
+  .catch((error) => {
+    console.log(error);
   });
-  userInfo.setUserAvatar({
-    avatar: userData.avatar,
-  });
-  userId = userData._id;
-  userInfo.setUserInfo(userData);
-  section.renderItems(cards);
-});
 
 ///////////queryselectors///////
 const profileEditOpen = document.querySelector(".profile__button-edit");
@@ -64,7 +68,9 @@ const popupConfig = {
 const cardPreview = new PopupWithImage({ popupSelector: "#image-modal" });
 
 //////////delete card modal////
-const cardRemove = new RemoveCard({ popupSelector: "#modal-delete" });
+const cardRemove = new PopupWithConfirmation({
+  popupSelector: "#modal-delete",
+});
 
 /////////card build/////////
 const createCard = (cardData) => {
@@ -113,7 +119,6 @@ const createCard = (cardData) => {
               console.log("Error adding like:", error);
             });
         }
-        updatlikes(likes);
       },
     },
     "#card-template"
